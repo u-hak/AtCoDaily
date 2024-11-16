@@ -19,7 +19,10 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@types/node": "^22.9.0",
+    "commitlint": "^19.5.0",
     "esbuild": "^0.24.0",
     "lefthook": "^1.8.2",
     "tsx": "^4.19.2",
