@@ -4,13 +4,13 @@
   "description": "Post AtCoder problem everyday in Discord",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsx build.ts",
     "check:type": "tsc --noEmit",
     "check:format": "biome format ./src",
     "format": "biome format --write ./src",
     "check:lint": "biome check ./src",
-    "lint": "biome check --write ./src"
+    "lint": "biome check --write ./src",
+    "test": "vitest"
   },
   "type": "module",
   "keywords": [],
@@ -21,7 +21,8 @@
     "@types/node": "^22.9.0",
     "esbuild": "^0.24.0",
     "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
   },
   "dependencies": {
     "discord.js": "^14.16.3"
