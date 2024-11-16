@@ -10,7 +10,8 @@
     "format": "biome format --write ./src",
     "check:lint": "biome check ./src",
     "lint": "biome check --write ./src",
-    "test": "vitest"
+    "test": "vitest",
+    "postinstall": "lefthook install"
   },
   "type": "module",
   "keywords": [],
@@ -20,6 +21,7 @@
     "@biomejs/biome": "^1.9.4",
     "@types/node": "^22.9.0",
     "esbuild": "^0.24.0",
+    "lefthook": "^1.8.2",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "vitest": "^2.1.5"
