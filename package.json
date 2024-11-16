@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsx build.ts",
-    "check": "tsc --noEmit"
+    "check:type": "tsc --noEmit",
+    "check:format": "biome format ./src",
+    "format": "biome format --write ./src",
+    "check:lint": "biome check ./src",
+    "lint": "biome check --write ./src"
   },
   "type": "module",
   "keywords": [],
