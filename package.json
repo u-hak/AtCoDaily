@@ -1,0 +1,19 @@
+{
+  "name": "AtCoDaily-bot",
+  "version": "0.1.0",
+  "description": "Post AtCoder problem everyday in Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Alliana",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3"
+  }
+}
