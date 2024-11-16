@@ -6,10 +6,10 @@
   "scripts": {
     "build": "tsx build.ts",
     "check:type": "tsc --noEmit",
-    "check:format": "biome format ./src",
-    "format": "biome format --write ./src",
-    "check:lint": "biome check ./src",
-    "lint": "biome check --write ./src",
+    "check:format": "biome format .",
+    "format": "biome format --write .",
+    "check:lint": "biome check .",
+    "lint": "biome check --write .",
     "test": "vitest",
     "postinstall": "lefthook install"
   },
