@@ -9,7 +9,6 @@ import {
   extractTask,
   extractUser,
   isValidSubmissionStatusExpr,
-  scrapeSubmission,
 } from "./submission.ts";
 import { AtCoderTask, AtCoderUser } from "./type.ts";
 
