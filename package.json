@@ -11,7 +11,8 @@
     "check:lint": "biome check .",
     "lint": "biome check --write .",
     "test": "vitest",
-    "postinstall": "lefthook install"
+    "postinstall": "lefthook install",
+    "dev": "tsx --env-file=.env src/main.ts"
   },
   "type": "module",
   "keywords": [],
