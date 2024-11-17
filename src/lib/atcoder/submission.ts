@@ -9,7 +9,7 @@ import {
   SubmissionPageFetchFailed,
   UnknownSubmissionStatus,
 } from "./error.ts";
-import { AtCoderSubmission, AtCoderTask } from "./type.ts";
+import { AtCoderSubmission, AtCoderTask, AtCoderUser } from "./type.ts";
 
 export const isValidSubmissionStatusExpr = (
   expr: unknown,
@@ -80,6 +80,21 @@ export const extractStatus = (
   return TE.left(new ElementNotFound(query));
 };
 
+export const extractUser = (
+  root: HTMLElement,
+): TE.TaskEither<ElementNotFound, AtCoderUser> => {
+  const query =
+    "#main-container > div.row > div > div.panel > table tr:nth-child(3) a";
+  const elem = root.querySelector(query);
+  if (elem) {
+    const userName = elem.innerText;
+
+    return TE.right(AtCoderUser.fromString(userName));
+  }
+
+  return TE.left(new ElementNotFound(query));
+};
+
 export const scrapeSubmission = (url: string) => {
   return pipe(
     TE.Do,
@@ -89,6 +104,7 @@ export const scrapeSubmission = (url: string) => {
     TE.bindW("data", ({ root }) =>
       sequenceT(getValidation())(
         lift(extractDate(root)),
+        lift(extractUser(root)),
         lift(extractTask(root)),
         lift(extractStatus(root)),
       ),

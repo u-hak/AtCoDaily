@@ -14,6 +14,7 @@ export const AtCoderTask = {
 
 export interface AtCoderSubmission {
   date: Date;
+  user: AtCoderUser;
   task: AtCoderTask;
   status: "RE" | "TLE" | "WA" | "AC";
 }
@@ -26,12 +27,28 @@ export const AtCoderSubmission = {
   },
 
   fromSeq(
-    arg: TupleFromInterface<AtCoderSubmission, ["date", "task", "status"]>,
+    arg: TupleFromInterface<
+      AtCoderSubmission,
+      ["date", "user", "task", "status"]
+    >,
   ) {
     return {
       date: arg[0],
-      status: arg[1],
-      task: arg[2],
+      user: arg[1],
+      status: arg[2],
+      task: arg[3],
+    };
+  },
+};
+
+export interface AtCoderUser {
+  name: string;
+}
+
+export const AtCoderUser = {
+  fromString(str: string): AtCoderUser {
+    return {
+      name: str,
     };
   },
 };

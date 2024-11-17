@@ -7,10 +7,11 @@ import {
   extractDate,
   extractStatus,
   extractTask,
+  extractUser,
   isValidSubmissionStatusExpr,
   scrapeSubmission,
 } from "./submission.ts";
-import { AtCoderTask } from "./type.ts";
+import { AtCoderTask, AtCoderUser } from "./type.ts";
 
 describe("isValidSubmissionStatusExpr will judge", () => {
   it.each([
@@ -85,6 +86,22 @@ describe("extractStatus", () => {
     )();
 
     expect(getOrElse((e) => e)(data)).toBeInstanceOf(UnknownSubmissionStatus);
+  });
+
+  it("should error invalid page", async () => {
+    const data = await extractStatus(invalidRoot)();
+
+    expect(getOrElse((e) => e)(data)).toBeInstanceOf(ElementNotFound);
+  });
+});
+
+describe("extractUser", () => {
+  it("should ok valid page", async () => {
+    const data = await extractUser(root)();
+
+    expect(getOrElse((e) => e)(data)).toStrictEqual(
+      AtCoderUser.fromString("Alliana"),
+    );
   });
 
   it("should error invalid page", async () => {
