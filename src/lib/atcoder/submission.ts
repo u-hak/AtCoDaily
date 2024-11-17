@@ -33,7 +33,7 @@ export const extractDate = (
   if (elem) {
     return TE.right(new Date(Date.parse(elem.text)));
   }
-  return TE.left(new ElementNotFound(`searched ${query}, but not found`));
+  return TE.left(new ElementNotFound());
 };
 
 export const extractTask = (
@@ -55,7 +55,7 @@ export const extractTask = (
       }),
     );
   }
-  return TE.left(new ElementNotFound(query));
+  return TE.left(new ElementNotFound());
 };
 
 export const extractStatus = (
@@ -77,7 +77,7 @@ export const extractStatus = (
     );
   }
 
-  return TE.left(new ElementNotFound(query));
+  return TE.left(new ElementNotFound());
 };
 
 export const extractUser = (
@@ -92,7 +92,16 @@ export const extractUser = (
     return TE.right(AtCoderUser.fromString(userName));
   }
 
-  return TE.left(new ElementNotFound(query));
+  return TE.left(new ElementNotFound());
+};
+
+export const extractData = (root: HTMLElement) => {
+  return sequenceT(getValidation())(
+    lift(extractDate(root)),
+    lift(extractUser(root)),
+    lift(extractTask(root)),
+    lift(extractStatus(root)),
+  );
 };
 
 export const scrapeSubmission = (url: string) => {
@@ -101,14 +110,7 @@ export const scrapeSubmission = (url: string) => {
     TE.bindW("page", () => get(url, new SubmissionPageFetchFailed(url))),
     TE.bindW("text", ({ page }) => text(page)),
     TE.let("root", ({ text }) => parse(text)),
-    TE.bindW("data", ({ root }) =>
-      sequenceT(getValidation())(
-        lift(extractDate(root)),
-        lift(extractUser(root)),
-        lift(extractTask(root)),
-        lift(extractStatus(root)),
-      ),
-    ),
+    TE.bindW("data", ({ root }) => extractData(root)),
     TE.map(({ data }) => AtCoderSubmission.fromSeq(data)),
     TE.mapLeft((e) => e),
   );

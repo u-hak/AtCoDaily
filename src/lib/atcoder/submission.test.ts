@@ -4,13 +4,14 @@ import { parse } from "node-html-parser";
 import { describe, expect, it } from "vitest";
 import { ElementNotFound, UnknownSubmissionStatus } from "./error.ts";
 import {
+  extractData,
   extractDate,
   extractStatus,
   extractTask,
   extractUser,
   isValidSubmissionStatusExpr,
 } from "./submission.ts";
-import { AtCoderTask, AtCoderUser } from "./type.ts";
+import { AtCoderSubmission, AtCoderTask, AtCoderUser } from "./type.ts";
 
 describe("isValidSubmissionStatusExpr will judge", () => {
   it.each([
@@ -107,5 +108,38 @@ describe("extractUser", () => {
     const data = await extractStatus(invalidRoot)();
 
     expect(getOrElse((e) => e)(data)).toBeInstanceOf(ElementNotFound);
+  });
+});
+
+describe("extractData", () => {
+  it("should ok valid page", async () => {
+    const data = await extractData(root)();
+
+    expect(getOrElse((e) => e)(data)).toStrictEqual([
+      new Date(Date.parse("2024-11-16 23:17:14")),
+      AtCoderUser.fromString("Alliana"),
+      AtCoderTask.new({
+        difficulty: "C",
+        id: "abc380_c",
+        name: "Move Segment",
+      }),
+      "AC",
+    ]);
+  });
+
+  it("should error invalid status", async () => {
+    const data = await extractData(
+      parse(`
+<div id="judge-status">
+  <span>AC</span>
+</div>
+`),
+    )();
+
+    expect(getOrElse((e) => e)(data)).toStrictEqual([
+      new ElementNotFound(),
+      new ElementNotFound(),
+      new ElementNotFound(),
+    ]);
   });
 });
