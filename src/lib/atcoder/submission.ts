@@ -55,7 +55,7 @@ export const extractTask = (
       }),
     );
   }
-  return TE.left(new ElementNotFound(`searched ${query}, but not found`));
+  return TE.left(new ElementNotFound(query));
 };
 
 export const extractStatus = (
@@ -77,15 +77,13 @@ export const extractStatus = (
     );
   }
 
-  return TE.left(new ElementNotFound(`searched ${query}, but not found`));
+  return TE.left(new ElementNotFound(query));
 };
 
 export const scrapeSubmission = (url: string) => {
   return pipe(
     TE.Do,
-    TE.bindW("page", () =>
-      get(url, new SubmissionPageFetchFailed(`\`${url}\` may be invalid URL`)),
-    ),
+    TE.bindW("page", () => get(url, new SubmissionPageFetchFailed(url))),
     TE.bindW("text", ({ page }) => text(page)),
     TE.let("root", ({ text }) => parse(text)),
     TE.bindW("data", ({ root }) =>
