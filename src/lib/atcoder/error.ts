@@ -1,8 +1,11 @@
-export class UnknownSubmissionStatus extends Error {}
-export class ElementNotFound extends Error {}
+import { Data } from "effect";
 
-export class SubmissionPageFetchFailed extends Error {
-  constructor(url: string) {
-    super(`\`${url}\` may be invalid URL`);
-  }
-}
+export class UnknownSubmissionStatus extends Data.TaggedError(
+  "UnknownSubmissionStatus",
+) {}
+
+export class ElementNotFound extends Data.TaggedError("ElementNotFound") {}
+
+export class SubmissionPageFetchFailed extends Data.TaggedError(
+  "SubmissionPageFetchFailed",
+) {}
