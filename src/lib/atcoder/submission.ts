@@ -1,117 +1,97 @@
-import { sequenceT } from "fp-ts/lib/Apply.js";
-import * as TE from "fp-ts/lib/TaskEither.js";
-import { pipe } from "fp-ts/lib/function.js";
+import { FetchHttpClient, HttpClient } from "@effect/platform";
+import { Effect } from "effect";
 import { type HTMLElement, parse } from "node-html-parser";
-import { get, text } from "../fetch.ts";
-import { getValidation, lift } from "../taskValidation.ts";
-import {
-  ElementNotFound,
-  SubmissionPageFetchFailed,
-  UnknownSubmissionStatus,
-} from "./error.ts";
+import { ElementNotFound, UnknownSubmissionStatus } from "./error.ts";
 import { AtCoderSubmission, AtCoderTask, AtCoderUser } from "./type.ts";
 
-export const isValidSubmissionStatusExpr = (
-  expr: unknown,
-): expr is AtCoderSubmission["status"] => {
-  if (
-    typeof expr === "string" &&
-    ["RE", "TLE", "WA", "AC"].includes(expr.toUpperCase())
-  ) {
-    return true;
-  }
-  return false;
-};
+const fetchSubmissionPageText = (url: string) =>
+  Effect.gen(function* () {
+    const client = yield* HttpClient.HttpClient;
+    const response = yield* client.get(url);
+    return yield* response.text;
+  }).pipe(Effect.scoped, Effect.provide(FetchHttpClient.layer));
 
-export const extractDate = (
-  root: HTMLElement,
-): TE.TaskEither<ElementNotFound, Date> => {
-  const query =
-    "#main-container > div.row > div > div.panel > table tr:nth-child(1)";
-  const elem = root.querySelector(query);
+const parseHtml = (text: string) => Effect.succeed(parse(text));
 
-  if (elem) {
-    return TE.right(new Date(Date.parse(elem.text)));
-  }
-  return TE.left(new ElementNotFound());
-};
+const extract =
+  (query: string) =>
+  <T, E>(
+    root: HTMLElement,
+    transformer: (elem: HTMLElement) => Effect.Effect<T, E>,
+  ) =>
+    Effect.gen(function* () {
+      const elem = root.querySelector(query);
 
-export const extractTask = (
-  root: HTMLElement,
-): TE.TaskEither<ElementNotFound, AtCoderTask> => {
-  const query =
-    "#main-container > div.row > div > div.panel > table tr:nth-child(2) a";
-  const taskElem = root.querySelector(query);
-  const href = taskElem?.getAttribute("href");
+      if (!elem) {
+        return yield* new ElementNotFound();
+      }
 
-  if (taskElem && href) {
+      return yield* transformer(elem);
+    });
+
+const DateQuery =
+  "#main-container > div.row > div > div.panel > table tr:nth-child(1)";
+const TaskQuery =
+  "#main-container > div.row > div > div.panel > table tr:nth-child(2) a";
+const StatusQuery = "#judge-status > span";
+const UserQuery =
+  "#main-container > div.row > div > div.panel > table tr:nth-child(3) a";
+
+export const DateTransformer = (e: HTMLElement) =>
+  Effect.succeed(new Date(Date.parse(e.text)));
+export const TaskTransformer = (e: HTMLElement) =>
+  Effect.gen(function* () {
+    const href = e.getAttribute("href");
+    if (!href) {
+      return yield* new ElementNotFound();
+    }
+
     const id = href.split("/").slice(-1)[0];
-    const [difficulty, name] = taskElem.textContent.split(" - ");
-    return TE.right(
+    const [difficulty, name] = e.textContent.split(" - ");
+
+    return yield* Effect.succeed(
       AtCoderTask.new({
         difficulty,
         id,
         name,
       }),
     );
-  }
-  return TE.left(new ElementNotFound());
-};
-
-export const extractStatus = (
-  root: HTMLElement,
-): TE.TaskEither<
-  ElementNotFound | UnknownSubmissionStatus,
-  AtCoderSubmission["status"]
-> => {
-  const query = "#judge-status > span";
-  const statusElem = root.querySelector(query);
-  if (statusElem) {
-    const status = statusElem.innerText;
-    if (isValidSubmissionStatusExpr(status)) {
-      return TE.right(status);
+  });
+export const StatusTransformer = (
+  e: HTMLElement,
+): Effect.Effect<AtCoderSubmission["status"], UnknownSubmissionStatus> =>
+  Effect.gen(function* () {
+    const status = e.innerText;
+    if (!["RE", "TLE", "WA", "AC"].includes(status.toUpperCase())) {
+      return yield* new UnknownSubmissionStatus();
     }
 
-    return TE.left(
-      new UnknownSubmissionStatus(`want RE, TLE, WA, AC but got ${status}`),
-    );
-  }
+    return yield* Effect.succeed(status as AtCoderSubmission["status"]);
+  });
+const UserTransformer = (e: HTMLElement) =>
+  Effect.succeed(AtCoderUser.fromString(e.innerText));
 
-  return TE.left(new ElementNotFound());
-};
-
-export const extractUser = (
-  root: HTMLElement,
-): TE.TaskEither<ElementNotFound, AtCoderUser> => {
-  const query =
-    "#main-container > div.row > div > div.panel > table tr:nth-child(3) a";
-  const elem = root.querySelector(query);
-  if (elem) {
-    const userName = elem.innerText;
-
-    return TE.right(AtCoderUser.fromString(userName));
-  }
-
-  return TE.left(new ElementNotFound());
-};
-
-export const extractData = (root: HTMLElement) => {
-  return sequenceT(getValidation())(
-    lift(extractDate(root)),
-    lift(extractUser(root)),
-    lift(extractTask(root)),
-    lift(extractStatus(root)),
+const extractData = (root: HTMLElement) =>
+  Effect.all(
+    [
+      extract(DateQuery)(root, DateTransformer),
+      extract(TaskQuery)(root, TaskTransformer),
+      extract(StatusQuery)(root, StatusTransformer),
+      extract(UserQuery)(root, UserTransformer),
+    ],
+    {
+      concurrency: "unbounded",
+    },
+  ).pipe(
+    Effect.andThen(([date, task, status, user]) =>
+      AtCoderSubmission.new({ date, task, status, user }),
+    ),
   );
-};
 
-export const scrapeSubmission = (url: string) => {
-  return pipe(
-    TE.Do,
-    TE.bindW("page", () => get(url, new SubmissionPageFetchFailed(url))),
-    TE.bindW("text", ({ page }) => text(page)),
-    TE.let("root", ({ text }) => parse(text)),
-    TE.bindW("data", ({ root }) => extractData(root)),
-    TE.map(({ data }) => AtCoderSubmission.fromSeq(data)),
-    TE.mapLeft((e) => e),
-  );
-};
+export const scrapeSubmission = (url: string) =>
+  Effect.gen(function* () {
+    const text = yield* fetchSubmissionPageText(url);
+    const root = yield* parseHtml(text);
+
+    return yield* extractData(root);
+  });
