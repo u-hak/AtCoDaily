@@ -35,8 +35,8 @@ export const AtCoderSubmission = {
     return {
       date: arg[0],
       user: arg[1],
-      status: arg[2],
-      task: arg[3],
+      task: arg[2],
+      status: arg[3],
     };
   },
 };
