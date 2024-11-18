@@ -1,5 +1,3 @@
-import type { TupleFromInterface } from "../utilType.ts";
-
 export interface AtCoderTask {
   difficulty: string;
   id: string;
@@ -23,20 +21,6 @@ export const AtCoderSubmission = {
   new(arg: AtCoderSubmission): AtCoderSubmission {
     return {
       ...arg,
-    };
-  },
-
-  fromSeq(
-    arg: TupleFromInterface<
-      AtCoderSubmission,
-      ["date", "user", "task", "status"]
-    >,
-  ) {
-    return {
-      date: arg[0],
-      user: arg[1],
-      task: arg[2],
-      status: arg[3],
     };
   },
 };
