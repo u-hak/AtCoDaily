@@ -4,12 +4,13 @@ import {
   type Message,
   MessageType,
 } from "discord.js";
-import { Effect } from "effect";
+import { Console, Effect } from "effect";
 import {
   BotMessage,
   CommandNotFound,
   type DiscordCommand,
   DiscordInput,
+  InteractionError,
   NotBotCommand,
   UnsupportedMessageType,
 } from "../commands/type.ts";
@@ -49,11 +50,16 @@ export function generateDiscordInput(userInput: Message | Interaction) {
     }
 
     if (userInput.type === InteractionType.ApplicationCommand) {
+      yield* Effect.tryPromise({
+        try: () => userInput.deferReply(),
+        catch: (_) => new InteractionError(),
+      });
+
       return DiscordInput.new({
         type: "ApplicationCommand",
         messageId: userInput.id,
-        cmd: "",
-        args: [],
+        cmd: userInput.commandName,
+        args: [], // TODO: Fix later
       });
     }
 
@@ -77,16 +83,28 @@ export const commandHandler =
     Effect.Do.pipe(
       Effect.bind("di", () => generateDiscordInput(input)),
       Effect.bind("resp", ({ di }) => handleDiscordInput(cmds)(di)),
+      Effect.tap(({ resp, di }) => {
+        Effect.runFork(
+          Effect.log(
+            `[Command handler] ${di.cmd} executed by ${input.member?.user.username} via ${di.type}`,
+            `Response: ${JSON.stringify(resp)}`,
+          ),
+        );
+      }),
       Effect.map(({ resp }) => resp),
     ).pipe(
       Effect.catchTags({
         CommandNotFound: (e) => {
-          console.error(e);
+          Effect.runFork(Effect.logError(e));
           return Effect.succeed({ content: e.content });
         },
         CommandInternalError: (e) => {
-          console.error(e);
+          Effect.runFork(Effect.logError(e));
           return Effect.succeed({ content: e.content });
+        },
+        InteractionError: (e) => {
+          Effect.runFork(Effect.logError(e));
+          return Effect.succeed({ content: "Interaction error" });
         },
         BotMessage: (_) => Effect.fail(null),
         NotBotCommand: (_) => Effect.fail(null),
