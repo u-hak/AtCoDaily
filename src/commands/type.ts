@@ -1,4 +1,9 @@
-import type { Message, MessageCreateOptions, MessagePayload } from "discord.js";
+import type {
+  Message,
+  MessageCreateOptions,
+  MessagePayload,
+  SlashCommandBuilder,
+} from "discord.js";
 import { Data, type Effect } from "effect";
 
 export type DiscordInput =
@@ -24,6 +29,7 @@ export const DiscordInput = {
 
 export interface DiscordCommand {
   readonly name: string;
+  readonly slashCommand: SlashCommandBuilder;
   readonly execute: (
     input: DiscordInput,
   ) => Effect.Effect<ResponseAvailable, CommandInternalError>;
@@ -31,6 +37,7 @@ export interface DiscordCommand {
 
 export type ResponseAvailable = string | MessagePayload | MessageCreateOptions;
 
+export class InteractionError extends Data.TaggedError("InteractionError") {}
 export class NotBotCommand extends Data.TaggedError("NotBotCommand") {}
 export class BotMessage extends Data.TaggedError("BotMessage") {}
 export class UnsupportedMessageType extends Data.TaggedError(
