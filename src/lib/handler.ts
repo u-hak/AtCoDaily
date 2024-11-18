@@ -1,25 +1,95 @@
-import { FileSystem } from "@effect/platform";
-import { NodeContext, NodeRuntime } from "@effect/platform-node";
+import {
+  type Interaction,
+  InteractionType,
+  type Message,
+  MessageType,
+} from "discord.js";
 import { Effect } from "effect";
+import {
+  BotMessage,
+  CommandNotFound,
+  type DiscordCommand,
+  DiscordInput,
+  NotBotCommand,
+  UnsupportedMessageType,
+} from "../commands/type.ts";
 
-const importCommand = (path: string) =>
+export const parseCommandFromMessageContent = (content: string) =>
   Effect.gen(function* () {
-    Effect.tryPromise(() => import(path));
+    if (!content.startsWith("!")) {
+      return yield* new NotBotCommand();
+    }
+
+    const [cmd, ...args] = content.split(" ");
+
+    return {
+      cmd: cmd.substring(1),
+      args,
+    };
   });
 
-export const loadCommands = (dir: string) =>
-  Effect.gen(function* () {
-    const fs = yield* FileSystem.FileSystem;
+export function generateDiscordInput(userInput: Message | Interaction) {
+  return Effect.gen(function* () {
+    if (userInput.type === MessageType.Default) {
+      if (userInput.author.bot) {
+        return yield* new BotMessage();
+      }
 
-    const cmdFiles = yield* fs.readDirectory(dir);
+      const { cmd, args } = yield* parseCommandFromMessageContent(
+        userInput.content,
+      );
 
-    return yield* Effect.partition(cmdFiles, (cmdFile) => {
-      return importCommand(cmdFile);
+      return DiscordInput.new({
+        type: "Message",
+        messageId: userInput.id,
+        cmd,
+        args,
+        message: userInput,
+      });
+    }
+
+    if (userInput.type === InteractionType.ApplicationCommand) {
+      return DiscordInput.new({
+        type: "ApplicationCommand",
+        messageId: userInput.id,
+        cmd: "",
+        args: [],
+      });
+    }
+
+    return yield* new UnsupportedMessageType();
+  });
+}
+
+export const handleDiscordInput =
+  (cmds: DiscordCommand[]) => (input: DiscordInput) =>
+    Effect.gen(function* () {
+      const cmd = cmds.find((c) => c.name === input.cmd.toLowerCase());
+      if (!cmd) {
+        return yield* new CommandNotFound(input.cmd);
+      }
+
+      return yield* cmd.execute(input);
     });
-  }).pipe(Effect.provide(NodeContext.layer));
 
-export const registerCommands = () => {};
-
-export const handleCommands = () => {};
-
-Effect.runPromise(loadCommands("./src/commands")).then(console.log);
+export const commandHandler =
+  (cmds: DiscordCommand[]) => (input: Message | Interaction) =>
+    Effect.Do.pipe(
+      Effect.bind("di", () => generateDiscordInput(input)),
+      Effect.bind("resp", ({ di }) => handleDiscordInput(cmds)(di)),
+      Effect.map(({ resp }) => resp),
+    ).pipe(
+      Effect.catchTags({
+        CommandNotFound: (e) => {
+          console.error(e);
+          return Effect.succeed({ content: e.content });
+        },
+        CommandInternalError: (e) => {
+          console.error(e);
+          return Effect.succeed({ content: e.content });
+        },
+        BotMessage: (_) => Effect.fail(null),
+        NotBotCommand: (_) => Effect.fail(null),
+        UnsupportedMessageType: (_) => Effect.fail(null),
+      }),
+    );
