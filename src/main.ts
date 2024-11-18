@@ -1,5 +1,11 @@
 import { Client, GatewayIntentBits, Partials } from "discord.js";
-import { Effect } from "effect";
+import { Console, Effect } from "effect";
+import { PingCommand } from "./commands/ping.ts";
+import {
+  commandHandler,
+  generateDiscordInput,
+  handleDiscordInput,
+} from "./lib/handler.ts";
 
 const client = new Client({
   intents: [
@@ -20,8 +26,25 @@ const client = new Client({
   ],
 });
 
+const cmdHandler = commandHandler([PingCommand]);
+
 client.on("ready", (c) => {
   console.log(`Bot is logged in as ${c.user.tag}`);
+});
+
+client.on("messageCreate", async (message) => {
+  const resp = await Effect.runPromise(cmdHandler(message)).catch((_) => {});
+
+  if (resp) {
+    await message.channel.send(resp);
+  }
+});
+
+client.on("interactionCreate", async (interaction) => {
+  const resp = await Effect.runPromise(cmdHandler(interaction)).catch(
+    (_) => {},
+  );
+  console.log(resp);
 });
 
 const getToken = () =>
@@ -35,11 +58,8 @@ const getToken = () =>
     return yield* Effect.succeed(token);
   });
 
-const login = (token: string) => Effect.tryPromise(() => client.login(token));
-
-const main = Effect.gen(function* () {
-  const token = yield* getToken();
-  return yield* login(token);
-});
+const main = Effect.Do.pipe(Effect.bind("token", () => getToken())).pipe(
+  Effect.andThen(({ token }) => Effect.tryPromise(() => client.login(token))),
+);
 
 Effect.runPromise(main);
