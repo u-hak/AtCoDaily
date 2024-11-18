@@ -4,6 +4,7 @@ import {
   InteractionType,
   type Message,
   MessageType,
+  SlashCommandBuilder,
 } from "discord.js";
 import { Effect, Exit } from "effect";
 import {
@@ -123,8 +124,10 @@ const DummyMessage = {
 const DummyInteraction = {
   valid: {
     type: InteractionType.ApplicationCommand,
+    commandName: "test",
+    deferReply: () => Promise.resolve(),
     id: "4",
-  } as Interaction,
+  } as unknown as Interaction,
   invalid: {
     type: InteractionType.MessageComponent,
     id: "5",
@@ -193,7 +196,7 @@ describe("generateDiscordInput test", () => {
         DiscordInput.new({
           type: "ApplicationCommand",
           messageId: "4",
-          cmd: "",
+          cmd: "test",
           args: [],
         }),
       );
@@ -213,12 +216,18 @@ describe("generateDiscordInput test", () => {
 const testCommands: DiscordCommand[] = [
   {
     name: "test",
+    slashCommand: new SlashCommandBuilder()
+      .setName("test")
+      .setDescription("Test"),
     execute: (_: DiscordInput) => {
       return Effect.succeed("test");
     },
   },
   {
     name: "fail",
+    slashCommand: new SlashCommandBuilder()
+      .setName("fail")
+      .setDescription("Fail"),
     execute: (i: DiscordInput) => {
       return new CommandInternalError(
         i.cmd,
@@ -229,6 +238,9 @@ const testCommands: DiscordCommand[] = [
   },
   {
     name: "sum",
+    slashCommand: new SlashCommandBuilder()
+      .setName("sum")
+      .setDescription("sum"),
     execute: (i: DiscordInput) => {
       const nums = i.args.map((n) => Number.parseInt(n));
       if (nums.some((v) => Number.isNaN(v))) {
