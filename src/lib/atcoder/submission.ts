@@ -62,7 +62,7 @@ export const StatusTransformer = (
 ): Effect.Effect<AtCoderSubmission["status"], UnknownSubmissionStatus> =>
   Effect.gen(function* () {
     const status = e.innerText;
-    if (!["RE", "TLE", "WA", "AC"].includes(status.toUpperCase())) {
+    if (!["RE", "TLE", "WA", "AC", "CE"].includes(status.toUpperCase())) {
       return yield* new UnknownSubmissionStatus();
     }
 

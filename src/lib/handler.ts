@@ -1,10 +1,11 @@
 import {
+  type ChatInputCommandInteraction,
   type Interaction,
   InteractionType,
   type Message,
   MessageType,
 } from "discord.js";
-import { Console, Effect } from "effect";
+import { Effect } from "effect";
 import {
   BotMessage,
   CommandNotFound,
@@ -29,6 +30,10 @@ export const parseCommandFromMessageContent = (content: string) =>
     };
   });
 
+export const parseCommandFromInteraction = (
+  interaction: ChatInputCommandInteraction,
+) => Effect.succeed(interaction.options.data);
+
 export function generateDiscordInput(userInput: Message | Interaction) {
   return Effect.gen(function* () {
     if (userInput.type === MessageType.Default) {
@@ -50,17 +55,22 @@ export function generateDiscordInput(userInput: Message | Interaction) {
     }
 
     if (userInput.type === InteractionType.ApplicationCommand) {
-      yield* Effect.tryPromise({
-        try: () => userInput.deferReply(),
-        catch: (_) => new InteractionError(),
-      });
+      if (userInput.isChatInputCommand()) {
+        yield* Effect.tryPromise({
+          try: () => userInput.deferReply(),
+          catch: (_) => new InteractionError(),
+        });
 
-      return DiscordInput.new({
-        type: "ApplicationCommand",
-        messageId: userInput.id,
-        cmd: userInput.commandName,
-        args: [], // TODO: Fix later
-      });
+        console.log(parseCommandFromInteraction(userInput));
+
+        return DiscordInput.new({
+          type: "ApplicationCommand",
+          messageId: userInput.id,
+          cmd: userInput.commandName,
+          args: [], // TODO: Fix later
+          interaction: userInput,
+        });
+      }
     }
 
     return yield* new UnsupportedMessageType();

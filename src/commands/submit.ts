@@ -11,12 +11,15 @@ export const SubmitCommand: DiscordCommand = {
   name: "submit",
   slashCommand: new SlashCommandBuilder()
     .setName("submit")
-    .setDescription("Submitコマンド"),
-  execute: (di: DiscordInput) =>
+    .setDescription("Submitコマンド")
+    .addStringOption((o) =>
+      o.setName("url").setDescription("提出URL").setRequired(true),
+    ),
+  execute: (di: DiscordInput<{ url: string }>) =>
     Effect.Do.pipe(
       Effect.bind("url", () =>
         Effect.try({
-          try: () => di.args[0],
+          try: () => di.args.url,
           catch: (_) =>
             new CommandInternalError(di, "Arg `url` is not found, but require"),
         }),

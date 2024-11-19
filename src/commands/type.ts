@@ -1,24 +1,29 @@
 import type {
+  ChatInputCommandInteraction,
   Message,
   MessageCreateOptions,
   MessagePayload,
+  SharedSlashCommand,
   SlashCommandBuilder,
 } from "discord.js";
 import { Data, type Effect } from "effect";
 
-export type DiscordInput =
+export type DiscordInput<
+  T extends Record<string, unknown> | undefined = undefined,
+> =
   | {
       readonly type: "Message";
-      readonly args: string[];
+      readonly args: T;
       readonly cmd: string;
       readonly messageId: string;
       readonly message: Message;
     }
   | {
       readonly type: "ApplicationCommand";
-      readonly args: string[];
+      readonly args: T;
       readonly cmd: string;
       readonly messageId: string;
+      readonly interaction: ChatInputCommandInteraction;
     };
 
 export const DiscordInput = {
@@ -29,7 +34,7 @@ export const DiscordInput = {
 
 export interface DiscordCommand {
   readonly name: string;
-  readonly slashCommand: SlashCommandBuilder;
+  readonly slashCommand: SlashCommandBuilder | SharedSlashCommand;
   readonly execute: (
     input: DiscordInput,
   ) => Effect.Effect<ResponseAvailable, CommandInternalError>;
