@@ -1,92 +1,59 @@
 import {
+  type CacheType,
+  type ChatInputCommandInteraction,
   type Interaction,
   InteractionType,
   type Message,
-  MessageType,
+  type MessageCreateOptions,
 } from "discord.js";
-import { Console, Effect } from "effect";
+import { Effect } from "effect";
 import {
-  BotMessage,
   CommandNotFound,
   type DiscordCommand,
-  DiscordInput,
   InteractionError,
-  NotBotCommand,
   UnsupportedMessageType,
 } from "../commands/type.ts";
 
-export const parseCommandFromMessageContent = (content: string) =>
+const isChatInputCommandInteraction = (
+  input: Message | Interaction,
+): input is ChatInputCommandInteraction<CacheType> =>
+  input.type === InteractionType.ApplicationCommand &&
+  input.isChatInputCommand();
+
+export const validateInput = (input: Interaction) =>
   Effect.gen(function* () {
-    if (!content.startsWith("!")) {
-      return yield* new NotBotCommand();
-    }
-
-    const [cmd, ...args] = content.split(" ");
-
-    return {
-      cmd: cmd.substring(1),
-      args,
-    };
-  });
-
-export function generateDiscordInput(userInput: Message | Interaction) {
-  return Effect.gen(function* () {
-    if (userInput.type === MessageType.Default) {
-      if (userInput.author.bot) {
-        return yield* new BotMessage();
-      }
-
-      const { cmd, args } = yield* parseCommandFromMessageContent(
-        userInput.content,
-      );
-
-      return DiscordInput.new({
-        type: "Message",
-        messageId: userInput.id,
-        cmd,
-        args,
-        message: userInput,
-      });
-    }
-
-    if (userInput.type === InteractionType.ApplicationCommand) {
-      yield* Effect.tryPromise({
-        try: () => userInput.deferReply(),
-        catch: (_) => new InteractionError(),
-      });
-
-      return DiscordInput.new({
-        type: "ApplicationCommand",
-        messageId: userInput.id,
-        cmd: userInput.commandName,
-        args: [], // TODO: Fix later
-      });
+    if (isChatInputCommandInteraction(input)) {
+      return input;
     }
 
     return yield* new UnsupportedMessageType();
   });
-}
 
-export const handleDiscordInput =
-  (cmds: DiscordCommand[]) => (input: DiscordInput) =>
-    Effect.gen(function* () {
-      const cmd = cmds.find((c) => c.name === input.cmd.toLowerCase());
-      if (!cmd) {
-        return yield* new CommandNotFound(input.cmd);
-      }
-
-      return yield* cmd.execute(input);
-    });
+export const searchDiscordCommand = (cmds: DiscordCommand[], name: string) =>
+  Effect.gen(function* () {
+    const cmd = cmds.find((c) => c.name === name.toLowerCase());
+    return cmd ? cmd : yield* new CommandNotFound();
+  });
 
 export const commandHandler =
-  (cmds: DiscordCommand[]) => (input: Message | Interaction) =>
+  (cmds: DiscordCommand[]) =>
+  (input: Interaction): Effect.Effect<MessageCreateOptions, null> =>
     Effect.Do.pipe(
-      Effect.bind("di", () => generateDiscordInput(input)),
-      Effect.bind("resp", ({ di }) => handleDiscordInput(cmds)(di)),
-      Effect.tap(({ resp, di }) => {
+      Effect.bind("interaction", () => validateInput(input)),
+      Effect.tap(({ interaction }) =>
+        Effect.tryPromise({
+          try: () => interaction.deferReply(),
+          catch: () => new InteractionError(),
+        }),
+      ),
+      Effect.bind("cmd", ({ interaction }) =>
+        searchDiscordCommand(cmds, interaction.commandName),
+      ),
+      Effect.bind("resp", ({ cmd, interaction }) => cmd.execute(interaction)),
+      Effect.tap(({ interaction, resp }) => {
         Effect.runFork(
           Effect.log(
-            `[Command handler] ${di.cmd} executed by ${input.member?.user.username} via ${di.type}`,
+            `[Command handler] ${interaction.commandName} executed by ${input.member?.user.username}`,
             `Response: ${JSON.stringify(resp)}`,
           ),
         );
@@ -96,18 +63,15 @@ export const commandHandler =
       Effect.catchTags({
         CommandNotFound: (e) => {
           Effect.runFork(Effect.logError(e));
-          return Effect.succeed({ content: e.content });
+          return Effect.succeed({ content: e.toString(), ephemeral: true });
         },
         CommandInternalError: (e) => {
           Effect.runFork(Effect.logError(e));
-          return Effect.succeed({ content: e.content });
+          return Effect.succeed({ content: e.content, ephemeral: true });
         },
         InteractionError: (e) => {
-          Effect.runFork(Effect.logError(e));
-          return Effect.succeed({ content: "Interaction error" });
+          return Effect.succeed({ content: e.toString(), ephemeral: true });
         },
-        BotMessage: (_) => Effect.fail(null),
-        NotBotCommand: (_) => Effect.fail(null),
         UnsupportedMessageType: (_) => Effect.fail(null),
       }),
     );

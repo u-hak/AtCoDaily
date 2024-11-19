@@ -1,11 +1,12 @@
-import { Client, GatewayIntentBits, Partials } from "discord.js";
+import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
 import { Effect } from "effect";
 import { PingCommand } from "./commands/ping.ts";
+import { SubmitCommand } from "./commands/submit.ts";
 import type { DiscordCommand } from "./commands/type.ts";
 import { commandHandler } from "./lib/handler.ts";
 
 export class Bot extends Client {
-  public commands: DiscordCommand[] = [PingCommand];
+  public commands: DiscordCommand[] = [PingCommand, SubmitCommand];
 }
 
 export const client = new Bot({
@@ -31,17 +32,8 @@ client.on("ready", (c) => {
   Effect.runFork(Effect.log(`Bot is logged in as ${c.user.tag}`));
 });
 
-client.on("messageCreate", async (message) => {
-  const resp = await Effect.runPromise(
-    commandHandler(client.commands)(message),
-  ).catch((_) => {});
-
-  if (resp) {
-    await message.channel.send(resp);
-  }
-});
-
-client.on("interactionCreate", async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
   const resp = await Effect.runPromise(
     commandHandler(client.commands)(interaction),
   ).catch((_) => {});
