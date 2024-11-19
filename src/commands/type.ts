@@ -56,16 +56,15 @@ export class CommandInternalError extends Data.TaggedError(
 ) {
   public content: string;
   constructor(
-    public readonly cmd: string,
-    public readonly args: string[],
+    public readonly di: DiscordInput,
     public readonly cause?: string,
   ) {
     super();
     if (cause) {
-      this.content = `Command clashed when running \`${cmd} [${args}]\`
+      this.content = `Command clashed when running \`${this.di.cmd} [${this.di.args}]\`
 Cause: ${cause}`;
     } else {
-      this.content = `Command clashed when running \`${cmd} [${args}]\``;
+      this.content = `Command clashed when running \`${this.di.cmd} [${this.di.args}]\``;
     }
   }
 }
