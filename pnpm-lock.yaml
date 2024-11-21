@@ -13,7 +13,7 @@ importers:
         version: 0.69.25(effect@3.10.15)
       '@effect/platform-node':
         specifier: ^0.64.26
-        version: 0.64.26(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)
+        version: 0.64.27(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)
       discord.js:
         specifier: ^14.16.3
         version: 14.16.3
@@ -221,17 +221,17 @@ packages:
     resolution: {integrity: sha512-PZ+vLpxGCRtmr2RMkqh8Zp+BenUaJqlS6xhgWKEZcgC/vfHLEzpHtKkB0sl3nZWpwtcKk6YWy+pU3okL2I97FA==}
     engines: {node: '>=16.11.0'}
 
-  '@effect/platform-node-shared@0.19.25':
-    resolution: {integrity: sha512-q53V7lSf2qyke06QFj0y+9tnUkQwXXHfmFN5kA4D7TYWZgYIUmzDM0CRMgpUeLh7zSuk+KfNEhOHDpP7OKV4ZQ==}
+  '@effect/platform-node-shared@0.19.26':
+    resolution: {integrity: sha512-K73Xqr60Ia7WKAp47Ums7j3V1NlVkyzwqNLl4sHqPkiC00J+laLnH/VQm7QopPiS9UPLqv/SMJzMxKXBY86Djw==}
     peerDependencies:
-      '@effect/platform': ^0.69.24
-      effect: ^3.10.15
+      '@effect/platform': ^0.69.25
+      effect: ^3.10.16
 
-  '@effect/platform-node@0.64.26':
-    resolution: {integrity: sha512-7UiLDQDXBtq8ZzmWKyWRuKkvXVSDQlJ85xu2Qj3beG5qe63MblHKoLuXj2WtH1s8nyHiGPF1QXweZfYkptZM8w==}
+  '@effect/platform-node@0.64.27':
+    resolution: {integrity: sha512-sn+LwvDwqlLDfvUT4zGI3bPRLWEFOhFrPr6DNbI4WoYg1DIii0pUOK7qf+InNKjTSrYqBxLG3SuxReO/tSIhSg==}
     peerDependencies:
-      '@effect/platform': ^0.69.24
-      effect: ^3.10.15
+      '@effect/platform': ^0.69.25
+      effect: ^3.10.16
 
   '@effect/platform@0.69.25':
     resolution: {integrity: sha512-95INMcJbmA0Mj3muf15lgpYKbkvXb9TZM0RM79lonPlnq0BlGurxVWAPwYt3iwVStbHsrcTznQkjc6WP+aMX1A==}
@@ -1499,6 +1499,10 @@ packages:
     resolution: {integrity: sha512-U8uCCl2x9TK3WANvmBavymRzxbfFYG+tAu+fgx3zxQy3qdagQqBLwJVrdyO1TBfUXvfKveMKJZhpvUYoOjM+4g==}
     engines: {node: '>=18.17'}
 
+  undici@6.21.0:
+    resolution: {integrity: sha512-BUgJXc752Kou3oOIuU1i+yZZypyZRqNPW0vqoMPl8VaoalSfeR0D8/t4iAS3yirs79SSMTxTag+ZC86uswv+Cw==}
+    engines: {node: '>=18.17'}
+
   unicorn-magic@0.1.0:
     resolution: {integrity: sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==}
     engines: {node: '>=18'}
@@ -1803,20 +1807,20 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.19.25(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)':
+  '@effect/platform-node-shared@0.19.26(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)':
     dependencies:
       '@effect/platform': 0.69.25(effect@3.10.15)
       '@parcel/watcher': 2.5.0
       effect: 3.10.15
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.64.26(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)':
+  '@effect/platform-node@0.64.27(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)':
     dependencies:
       '@effect/platform': 0.69.25(effect@3.10.15)
-      '@effect/platform-node-shared': 0.19.25(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)
+      '@effect/platform-node-shared': 0.19.26(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)
       effect: 3.10.15
       mime: 3.0.0
-      undici: 6.19.8
+      undici: 6.21.0
       ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
@@ -2815,6 +2819,8 @@ snapshots:
   undici-types@6.19.8: {}
 
   undici@6.19.8: {}
+
+  undici@6.21.0: {}
 
   unicorn-magic@0.1.0: {}
 
