@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@effect/platform':
         specifier: ^0.69.24
-        version: 0.69.24(effect@3.10.15)
+        version: 0.69.25(effect@3.10.15)
       '@effect/platform-node':
         specifier: ^0.64.26
-        version: 0.64.26(@effect/platform@0.69.24(effect@3.10.15))(effect@3.10.15)
+        version: 0.64.26(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)
       discord.js:
         specifier: ^14.16.3
         version: 14.16.3
@@ -233,10 +233,10 @@ packages:
       '@effect/platform': ^0.69.24
       effect: ^3.10.15
 
-  '@effect/platform@0.69.24':
-    resolution: {integrity: sha512-SPQoIItSo6oFmCUcmnmEr9w+XH+IDOvgQI33kTw7Vjssm4ITfwx3BzMZl/M7Ozu9+g0IgE4SU/xRmW8YL3Z3BQ==}
+  '@effect/platform@0.69.25':
+    resolution: {integrity: sha512-95INMcJbmA0Mj3muf15lgpYKbkvXb9TZM0RM79lonPlnq0BlGurxVWAPwYt3iwVStbHsrcTznQkjc6WP+aMX1A==}
     peerDependencies:
-      effect: ^3.10.15
+      effect: ^3.10.16
 
   '@effect/vitest@0.13.16':
     resolution: {integrity: sha512-hZpSLj+FuV3R4dEyTNYQkkjZ9guP1XuNLcb/Xm0LV01vFpRN7EViQ/GTNa4wfyWyb66guQ41vwdDOKuDLLze7w==}
@@ -1803,17 +1803,17 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.19.25(@effect/platform@0.69.24(effect@3.10.15))(effect@3.10.15)':
+  '@effect/platform-node-shared@0.19.25(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)':
     dependencies:
-      '@effect/platform': 0.69.24(effect@3.10.15)
+      '@effect/platform': 0.69.25(effect@3.10.15)
       '@parcel/watcher': 2.5.0
       effect: 3.10.15
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.64.26(@effect/platform@0.69.24(effect@3.10.15))(effect@3.10.15)':
+  '@effect/platform-node@0.64.26(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)':
     dependencies:
-      '@effect/platform': 0.69.24(effect@3.10.15)
-      '@effect/platform-node-shared': 0.19.25(@effect/platform@0.69.24(effect@3.10.15))(effect@3.10.15)
+      '@effect/platform': 0.69.25(effect@3.10.15)
+      '@effect/platform-node-shared': 0.19.25(@effect/platform@0.69.25(effect@3.10.15))(effect@3.10.15)
       effect: 3.10.15
       mime: 3.0.0
       undici: 6.19.8
@@ -1822,7 +1822,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform@0.69.24(effect@3.10.15)':
+  '@effect/platform@0.69.25(effect@3.10.15)':
     dependencies:
       effect: 3.10.15
       find-my-way-ts: 0.1.5
