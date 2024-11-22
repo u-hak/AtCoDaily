@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  discordId String   @id
+  atcoderId String   @unique
+  submit    Submit[]
+
+  @@unique([discordId, atcoderId])
+}
+
+model Submit {
+  id String @id @default(uuid())
+
+  problem   Problem @relation(fields: [problemId], references: [id])
+  problemId String
+
+  account          Account @relation(fields: [accountDiscordId, accountAtcoderId], references: [discordId, atcoderId])
+  accountDiscordId String
+  accountAtcoderId String
+}
+
+model Problem {
+  id         String   @id
+  url        String   @unique
+  difficulty Int
+  times      Int      @default(0)
+  submit     Submit[]
+}
