@@ -1,6 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { Context, Effect, Layer } from "effect";
-import { AccountNotFound, Repository } from "./interface.ts";
+import {
+  AccountAlreadyCreated,
+  AccountNotFound,
+  Repository,
+  RepositoryException,
+} from "./interface.ts";
 
 const prisma = new PrismaClient();
 
@@ -11,8 +16,14 @@ const PrismaRepositoryContext: Context.Context<Repository> = Context.make(
       create: (data) =>
         Effect.tryPromise({
           try: () => prisma.account.create(data),
-          catch: (e) =>
-            e instanceof Error ? e : new Error(`account.create error ${e}`),
+          catch: (e) => {
+            if (e instanceof Prisma.PrismaClientKnownRequestError) {
+              if (e.code === "P2002") {
+                return new AccountAlreadyCreated({ cause: e });
+              }
+            }
+            return new RepositoryException({ cause: e });
+          },
         }),
       getByDiscordId: (id) =>
         Effect.tryPromise({
@@ -22,10 +33,7 @@ const PrismaRepositoryContext: Context.Context<Repository> = Context.make(
                 discordId: id,
               },
             }),
-          catch: (e) =>
-            e instanceof Error
-              ? e
-              : new Error(`account.getByDiscordId error ${e}`),
+          catch: (e) => new RepositoryException({ cause: e }),
         }).pipe(
           Effect.flatMap((acct) =>
             acct !== null
@@ -41,10 +49,7 @@ const PrismaRepositoryContext: Context.Context<Repository> = Context.make(
                 atcoderId: id,
               },
             }),
-          catch: (e) =>
-            e instanceof Error
-              ? e
-              : new Error(`account.getByDiscordId error ${e}`),
+          catch: (e) => new RepositoryException({ cause: e }),
         }).pipe(
           Effect.flatMap((acct) =>
             acct !== null

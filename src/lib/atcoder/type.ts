@@ -14,7 +14,7 @@ export interface AtCoderSubmission {
   date: Date;
   user: AtCoderUser;
   task: AtCoderTask;
-  status: "RE" | "TLE" | "WA" | "AC";
+  status: "RE" | "TLE" | "WA" | "AC" | "CE";
 }
 
 export const AtCoderSubmission = {

@@ -2,9 +2,9 @@ import {
   type CacheType,
   type ChatInputCommandInteraction,
   type Interaction,
+  type InteractionReplyOptions,
   InteractionType,
   type Message,
-  type MessageCreateOptions,
 } from "discord.js";
 import { Effect } from "effect";
 import {
@@ -12,6 +12,7 @@ import {
   type DiscordCommand,
   InteractionError,
   UnsupportedMessageType,
+  formatCommandInternalError,
 } from "../commands/type.ts";
 
 const isChatInputCommandInteraction = (
@@ -37,7 +38,7 @@ export const searchDiscordCommand = (cmds: DiscordCommand[], name: string) =>
 
 export const commandHandler =
   (cmds: DiscordCommand[]) =>
-  (input: Interaction): Effect.Effect<MessageCreateOptions, null> =>
+  (input: Interaction): Effect.Effect<InteractionReplyOptions, null> =>
     Effect.Do.pipe(
       Effect.bind("interaction", () => validateInput(input)),
       Effect.tap(({ interaction }) =>
@@ -59,18 +60,19 @@ export const commandHandler =
         );
       }),
       Effect.map(({ resp }) => resp),
-    ).pipe(
       Effect.catchTags({
         CommandNotFound: (e) => {
           Effect.runFork(Effect.logError(e));
-          return Effect.succeed({ content: e.toString(), ephemeral: true });
+          return Effect.succeed({ content: e.toString() });
         },
         CommandInternalError: (e) => {
           Effect.runFork(Effect.logError(e));
-          return Effect.succeed({ content: e.content, ephemeral: true });
+          return Effect.succeed({
+            content: formatCommandInternalError(e),
+          });
         },
         InteractionError: (e) => {
-          return Effect.succeed({ content: e.toString(), ephemeral: true });
+          return Effect.succeed({ content: e.toString() });
         },
         UnsupportedMessageType: (_) => Effect.fail(null),
       }),

@@ -1,9 +1,9 @@
-import type {
-  ChatInputCommandInteraction,
-  MessageCreateOptions,
-  MessagePayload,
-  SharedSlashCommand,
-  SlashCommandBuilder,
+import {
+  type ChatInputCommandInteraction,
+  type InteractionReplyOptions,
+  type SharedSlashCommand,
+  type SlashCommandBuilder,
+  codeBlock,
 } from "discord.js";
 import { Data, type Effect } from "effect";
 
@@ -12,7 +12,7 @@ export interface DiscordCommand {
   readonly slashCommand: SlashCommandBuilder | SharedSlashCommand;
   readonly execute: (
     input: ChatInputCommandInteraction,
-  ) => Effect.Effect<MessageCreateOptions, CommandInternalError>;
+  ) => Effect.Effect<InteractionReplyOptions, CommandInternalError>;
 }
 
 export class InteractionError extends Data.TaggedError("InteractionError") {}
@@ -23,18 +23,8 @@ export class UnsupportedMessageType extends Data.TaggedError(
 export class CommandNotFound extends Data.TaggedError("CommandNotFound") {}
 export class CommandInternalError extends Data.TaggedError(
   "CommandInternalError",
-) {
-  public content: string;
-  constructor(
-    public readonly name: string,
-    public readonly cause?: string,
-  ) {
-    super();
-    if (cause) {
-      this.content = `Command clashed when running \`${this.name}\`
-Cause: ${cause}`;
-    } else {
-      this.content = `Command clashed when running \`${this.name}\``;
-    }
-  }
-}
+)<{ name: string; cause?: unknown }> {}
+
+export const formatCommandInternalError = (e: CommandInternalError): string => {
+  return `コマンド実行時にエラーが発生しました．\nFull log: ${codeBlock("json", JSON.stringify(e, null, "\t"))}`;
+};
