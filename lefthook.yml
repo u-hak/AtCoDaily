@@ -43,6 +43,8 @@ pre-commit:
     lint:
       run: 'pnpm lint'
       stage_fixed: true
+    checkType:
+      run: 'pnpm check:type'
 
 
 commit-msg:
