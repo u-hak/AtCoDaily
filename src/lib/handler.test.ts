@@ -10,7 +10,7 @@ import {
   CommandNotFound,
   type DiscordCommand,
   InteractionError,
-  UnsupportedMessageType,
+  formatCommandInternalError,
 } from "../commands/type.ts";
 import { commandHandler } from "./handler.ts";
 
@@ -22,7 +22,7 @@ const cmds: DiscordCommand[] = [
   },
   {
     name: "fail",
-    execute: () => Effect.fail(new CommandInternalError("fail")),
+    execute: () => Effect.fail(new CommandInternalError({ name: "fail" })),
     slashCommand: {} as SlashCommandBuilder,
   },
 ];
@@ -89,7 +89,6 @@ describe("commandHandler test", () => {
       expect(result).toStrictEqual(
         Exit.succeed({
           content: new InteractionError().toString(),
-          ephemeral: true,
         }),
       );
     }),
@@ -102,7 +101,6 @@ describe("commandHandler test", () => {
       expect(result).toStrictEqual(
         Exit.succeed({
           content: new CommandNotFound().toString(),
-          ephemeral: true,
         }),
       );
     }),
@@ -114,8 +112,9 @@ describe("commandHandler test", () => {
       );
       expect(result).toStrictEqual(
         Exit.succeed({
-          content: new CommandInternalError("fail").content,
-          ephemeral: true,
+          content: formatCommandInternalError(
+            new CommandInternalError({ name: "fail" }),
+          ),
         }),
       );
     }),

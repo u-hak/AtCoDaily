@@ -1,12 +1,13 @@
 import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
 import { Effect } from "effect";
+import { LinkCommand } from "./commands/link.ts";
 import { PingCommand } from "./commands/ping.ts";
 import { SubmitCommand } from "./commands/submit.ts";
 import type { DiscordCommand } from "./commands/type.ts";
 import { commandHandler } from "./lib/handler.ts";
 
 export class Bot extends Client {
-  public commands: DiscordCommand[] = [PingCommand, SubmitCommand];
+  public commands: DiscordCommand[] = [PingCommand, SubmitCommand, LinkCommand];
 }
 
 export const client = new Bot({
@@ -38,6 +39,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
     commandHandler(client.commands)(interaction),
   ).catch((_) => {});
   if (resp && interaction.isRepliable()) {
-    interaction.editReply(resp);
+    interaction.followUp(resp);
   }
 });
