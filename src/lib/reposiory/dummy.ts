@@ -4,18 +4,41 @@ import { Repository } from "./interface.ts";
 const DummyRepositoryContext: Context.Context<Repository> = Context.make(
   Repository,
   {
-    account: {
-      create: (data) => Effect.succeed(data.data),
-      getByDiscordId: (id) =>
+    problem: {
+      getTodayProblem: () =>
+        Effect.succeed([
+          {
+            id: "abc000_a",
+            url: "https://atcoder.jp/contests/abc000/tasks/abc000_a",
+            difficulty: 0,
+            times: 0,
+            submit: [],
+            revision: [],
+          },
+          {
+            id: "abc000_b",
+            url: "https://atcoder.jp/contests/abc000/tasks/abc000_b",
+            difficulty: 1,
+            times: 0,
+            submit: [],
+            revision: [],
+          },
+          {
+            id: "abc000_c",
+            url: "https://atcoder.jp/contests/abc000/tasks/abc000_c",
+            difficulty: 2,
+            times: 0,
+            submit: [],
+            revision: [],
+          },
+        ]),
+    },
+    problemRevision: {
+      getRevision: (date) =>
         Effect.succeed({
-          discordId: id,
-          atcoderId: "dummy",
+          date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
         }),
-      getByAtcoderId: (id) =>
-        Effect.succeed({
-          discordId: "dummy",
-          atcoderId: id,
-        }),
+      createRevision: (_date, _problems) => Effect.succeed(undefined),
     },
   },
 );

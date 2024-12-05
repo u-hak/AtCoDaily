@@ -1,62 +1,74 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { Context, Effect, Layer } from "effect";
-import {
-  AccountAlreadyCreated,
-  AccountNotFound,
-  Repository,
-  RepositoryException,
-} from "./interface.ts";
+import { Repository, RepositoryException } from "./interface.ts";
 
 const prisma = new PrismaClient();
 
 const PrismaRepositoryContext: Context.Context<Repository> = Context.make(
   Repository,
   {
-    account: {
-      create: (data) =>
-        Effect.tryPromise({
-          try: () => prisma.account.create(data),
-          catch: (e) => {
-            if (e instanceof Prisma.PrismaClientKnownRequestError) {
-              if (e.code === "P2002") {
-                return new AccountAlreadyCreated({ cause: e });
-              }
-            }
-            return new RepositoryException({ cause: e });
-          },
+    problem: {
+      getTodayProblem: () =>
+        Effect.gen(function* () {
+          const count = yield* Effect.tryPromise({
+            try: () => prisma.problem.count(),
+            catch: (e) => new RepositoryException({ cause: e }),
+          });
+          const problems = [];
+          for (const i of [0, 1, 2]) {
+            const skip = Math.floor((count / 3) * Math.random());
+            const prob = yield* Effect.tryPromise({
+              try: () =>
+                prisma.problem.findMany({
+                  where: {
+                    difficulty: i,
+                  },
+                  orderBy: {
+                    times: "asc",
+                  },
+                  take: 1,
+                  skip: skip,
+                }),
+              catch: (e) => new RepositoryException({ cause: e }),
+            });
+            problems.push(prob[0]);
+          }
+
+          return problems;
         }),
-      getByDiscordId: (id) =>
-        Effect.tryPromise({
-          try: () =>
-            prisma.account.findUnique({
-              where: {
-                discordId: id,
-              },
-            }),
-          catch: (e) => new RepositoryException({ cause: e }),
-        }).pipe(
-          Effect.flatMap((acct) =>
-            acct !== null
-              ? Effect.succeed(acct)
-              : Effect.fail(new AccountNotFound()),
-          ),
-        ),
-      getByAtcoderId: (id) =>
-        Effect.tryPromise({
-          try: () =>
-            prisma.account.findUnique({
-              where: {
-                atcoderId: id,
-              },
-            }),
-          catch: (e) => new RepositoryException({ cause: e }),
-        }).pipe(
-          Effect.flatMap((acct) =>
-            acct !== null
-              ? Effect.succeed(acct)
-              : Effect.fail(new AccountNotFound()),
-          ),
-        ),
+    },
+    problemRevision: {
+      createRevision: (date, problem) =>
+        Effect.gen(function* () {
+          const ids = problem.map((v) => ({ id: v.id }));
+          return yield* Effect.tryPromise({
+            try: () =>
+              prisma.problemRevision.create({
+                data: {
+                  date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`,
+                  problems: {
+                    connect: ids,
+                  },
+                },
+              }),
+            catch: (e) => new RepositoryException({ cause: e }),
+          });
+        }),
+      getRevision: (date) =>
+        Effect.gen(function* () {
+          return yield* Effect.tryPromise({
+            try: () =>
+              prisma.problemRevision.findUniqueOrThrow({
+                where: {
+                  date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`,
+                },
+                include: {
+                  problems: true,
+                },
+              }),
+            catch: (e) => new RepositoryException({ cause: e }),
+          });
+        }),
     },
   },
 );

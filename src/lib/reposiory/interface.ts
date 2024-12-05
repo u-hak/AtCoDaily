@@ -1,17 +1,18 @@
-import type { Account, Prisma } from "@prisma/client";
+import type { Problem, ProblemRevision } from "@prisma/client";
 import { Context, Data, type Effect } from "effect";
 
 export type Repository = {
-  account: {
-    create: (
-      data: Prisma.AccountCreateArgs,
-    ) => Effect.Effect<Account, AccountAlreadyCreated | RepositoryException>;
-    getByDiscordId: (
-      id: string,
-    ) => Effect.Effect<Account, AccountNotFound | RepositoryException>;
-    getByAtcoderId: (
-      id: string,
-    ) => Effect.Effect<Account, AccountNotFound | RepositoryException>;
+  problem: {
+    getTodayProblem: () => Effect.Effect<Problem[], RepositoryException>;
+  };
+  problemRevision: {
+    createRevision: (
+      date: Date,
+      problems: Problem[],
+    ) => Effect.Effect<void, RepositoryException>;
+    getRevision: (
+      date: Date,
+    ) => Effect.Effect<ProblemRevision, RepositoryException>;
   };
 };
 
