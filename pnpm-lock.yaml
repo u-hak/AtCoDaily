@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@effect/platform':
         specifier: ^0.70.0
-        version: 0.70.6(effect@3.11.4)
+        version: 0.70.7(effect@3.11.4)
       '@effect/platform-node':
         specifier: ^0.65.0
-        version: 0.65.6(@effect/platform@0.70.6(effect@3.11.4))(effect@3.11.4)
+        version: 0.65.6(@effect/platform@0.70.7(effect@3.11.4))(effect@3.11.4)
       '@prisma/client':
         specifier: 6.0.1
         version: 6.0.1(prisma@6.0.1)
@@ -239,10 +239,10 @@ packages:
       '@effect/platform': ^0.70.6
       effect: ^3.11.4
 
-  '@effect/platform@0.70.6':
-    resolution: {integrity: sha512-FChP5iR1GzMLaJNgvB5mAfdwk9ukhOuKsHeHuuuiihivReMf1Jmbpc+gGCvxSa8e/nmAl+6EsqmJsN4w3K0tjw==}
+  '@effect/platform@0.70.7':
+    resolution: {integrity: sha512-TbNwj/mOJhycPygbmicGBS7CNtv5Z8WVheRbLUdP3oPAe/nbSOJVLc8ZPvOejhquF/1vJMKuqY5MWfkcBpvi/g==}
     peerDependencies:
-      effect: ^3.11.4
+      effect: ^3.11.5
 
   '@effect/vitest@0.14.5':
     resolution: {integrity: sha512-ioLHA/WFaT6o8+/6/dOZzSIVLJkvd6PNt5SRIFYZKpenca61pM7JyI3MNmV2lAY3wqxyIp8BAmZFRkhpFiFr8A==}
@@ -1842,17 +1842,17 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.20.6(@effect/platform@0.70.6(effect@3.11.4))(effect@3.11.4)':
+  '@effect/platform-node-shared@0.20.6(@effect/platform@0.70.7(effect@3.11.4))(effect@3.11.4)':
     dependencies:
-      '@effect/platform': 0.70.6(effect@3.11.4)
+      '@effect/platform': 0.70.7(effect@3.11.4)
       '@parcel/watcher': 2.5.0
       effect: 3.11.4
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.65.6(@effect/platform@0.70.6(effect@3.11.4))(effect@3.11.4)':
+  '@effect/platform-node@0.65.6(@effect/platform@0.70.7(effect@3.11.4))(effect@3.11.4)':
     dependencies:
-      '@effect/platform': 0.70.6(effect@3.11.4)
-      '@effect/platform-node-shared': 0.20.6(@effect/platform@0.70.6(effect@3.11.4))(effect@3.11.4)
+      '@effect/platform': 0.70.7(effect@3.11.4)
+      '@effect/platform-node-shared': 0.20.6(@effect/platform@0.70.7(effect@3.11.4))(effect@3.11.4)
       effect: 3.11.4
       mime: 3.0.0
       undici: 6.21.0
@@ -1861,7 +1861,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform@0.70.6(effect@3.11.4)':
+  '@effect/platform@0.70.7(effect@3.11.4)':
     dependencies:
       effect: 3.11.4
       find-my-way-ts: 0.1.5
