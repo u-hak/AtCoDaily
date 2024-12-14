@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@effect/platform':
         specifier: ^0.71.0
-        version: 0.71.2(effect@3.11.6)
+        version: 0.71.2(effect@3.11.7)
       '@effect/platform-node':
         specifier: ^0.66.0
-        version: 0.66.2(@effect/platform@0.71.2(effect@3.11.6))(effect@3.11.6)
+        version: 0.66.2(@effect/platform@0.71.2(effect@3.11.7))(effect@3.11.7)
       '@prisma/client':
         specifier: 6.0.1
         version: 6.0.1(prisma@6.0.1)
@@ -22,7 +22,7 @@ importers:
         version: 14.16.3
       effect:
         specifier: ^3.10.15
-        version: 3.11.6
+        version: 3.11.7
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -35,7 +35,7 @@ importers:
         version: 19.6.0
       '@effect/vitest':
         specifier: ^0.14.0
-        version: 0.14.7(effect@3.11.6)(vitest@2.1.8(@types/node@22.10.2))
+        version: 0.14.7(effect@3.11.7)(vitest@2.1.8(@types/node@22.10.2))
       '@types/node':
         specifier: ^22.9.0
         version: 22.10.2
@@ -1092,8 +1092,8 @@ packages:
     resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==}
     engines: {node: '>=8'}
 
-  effect@3.11.6:
-    resolution: {integrity: sha512-RcgLM69PKk+Nl3uQ61Es/mTchUeL5xqx4w2SfEgvZCM2SISJIFQVNHCJWGuGWgz/F/XcBQQJKevsdhbCn22ApA==}
+  effect@3.11.7:
+    resolution: {integrity: sha512-laj+TCxWGn0eOv6jNmS9vavMO01Z4vvRr7v5airaOUfE7Zr5PrHiECpiI5HRvOewxa1im/4EcOvRodOZ1S2Y7Q==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -1138,8 +1138,8 @@ packages:
     resolution: {integrity: sha512-bFi65yM+xZgk+u/KRIpekdSYkTB5W1pEf0Lt8Q8Msh7b+eQ7LXVtIB1Bkm4fvclDEL1b2CZkMhv2mOeF8tMdkA==}
     engines: {node: '>=12.0.0'}
 
-  fast-check@3.23.1:
-    resolution: {integrity: sha512-u/MudsoQEgBUZgR5N1v87vEgybeVYus9VnDVaIkxkkGP2jt54naghQ3PCQHJiogS8U/GavZCUPFfx3Xkp+NaHw==}
+  fast-check@3.23.2:
+    resolution: {integrity: sha512-h5+1OzzfCC3Ef7VbtKdcv7zsstUQwUDlYpUTvjeUsJAssPgLn7QzbboPtL5ro04Mq0rPOsMzl7q5hIbRs2wD1A==}
     engines: {node: '>=8.0.0'}
 
   fast-deep-equal@3.1.3:
@@ -1842,18 +1842,18 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.21.2(@effect/platform@0.71.2(effect@3.11.6))(effect@3.11.6)':
+  '@effect/platform-node-shared@0.21.2(@effect/platform@0.71.2(effect@3.11.7))(effect@3.11.7)':
     dependencies:
-      '@effect/platform': 0.71.2(effect@3.11.6)
+      '@effect/platform': 0.71.2(effect@3.11.7)
       '@parcel/watcher': 2.5.0
-      effect: 3.11.6
+      effect: 3.11.7
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.66.2(@effect/platform@0.71.2(effect@3.11.6))(effect@3.11.6)':
+  '@effect/platform-node@0.66.2(@effect/platform@0.71.2(effect@3.11.7))(effect@3.11.7)':
     dependencies:
-      '@effect/platform': 0.71.2(effect@3.11.6)
-      '@effect/platform-node-shared': 0.21.2(@effect/platform@0.71.2(effect@3.11.6))(effect@3.11.6)
-      effect: 3.11.6
+      '@effect/platform': 0.71.2(effect@3.11.7)
+      '@effect/platform-node-shared': 0.21.2(@effect/platform@0.71.2(effect@3.11.7))(effect@3.11.7)
+      effect: 3.11.7
       mime: 3.0.0
       undici: 6.21.0
       ws: 8.18.0
@@ -1861,15 +1861,15 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform@0.71.2(effect@3.11.6)':
+  '@effect/platform@0.71.2(effect@3.11.7)':
     dependencies:
-      effect: 3.11.6
+      effect: 3.11.7
       find-my-way-ts: 0.1.5
       multipasta: 0.2.5
 
-  '@effect/vitest@0.14.7(effect@3.11.6)(vitest@2.1.8(@types/node@22.10.2))':
+  '@effect/vitest@0.14.7(effect@3.11.7)(vitest@2.1.8(@types/node@22.10.2))':
     dependencies:
-      effect: 3.11.6
+      effect: 3.11.7
       vitest: 2.1.8(@types/node@22.10.2)
 
   '@esbuild/aix-ppc64@0.21.5':
@@ -2459,9 +2459,9 @@ snapshots:
     dependencies:
       is-obj: 2.0.0
 
-  effect@3.11.6:
+  effect@3.11.7:
     dependencies:
-      fast-check: 3.23.1
+      fast-check: 3.23.2
 
   emoji-regex@8.0.0: {}
 
@@ -2563,7 +2563,7 @@ snapshots:
 
   expect-type@1.1.0: {}
 
-  fast-check@3.23.1:
+  fast-check@3.23.2:
     dependencies:
       pure-rand: 6.1.0
 
