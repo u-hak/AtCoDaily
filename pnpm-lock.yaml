@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@effect/platform':
         specifier: ^0.71.0
-        version: 0.71.4(effect@3.11.8)
+        version: 0.71.5(effect@3.11.8)
       '@effect/platform-node':
         specifier: ^0.67.0
-        version: 0.67.0(@effect/platform@0.71.4(effect@3.11.8))(effect@3.11.8)
+        version: 0.67.0(@effect/platform@0.71.5(effect@3.11.8))(effect@3.11.8)
       '@prisma/client':
         specifier: 6.1.0
         version: 6.1.0(prisma@6.1.0)
@@ -239,8 +239,8 @@ packages:
       '@effect/platform': ^0.71.4
       effect: ^3.11.8
 
-  '@effect/platform@0.71.4':
-    resolution: {integrity: sha512-4yi9MN9OFB1q/MsjqcB2Skjh+TEnWLKvrHxgLTqgqConhEmaeP7Lzso2S9QZ7N4gf/eEnD5Y8F1i4FcNq8RXSg==}
+  '@effect/platform@0.71.5':
+    resolution: {integrity: sha512-F+v7uYZ1ObGUmh3qqUS/1Dynj141ZDx+Oa697822Yc5QRu6xDfTBEHviByseVYK451bwSvsyidi4aCloH0GrLg==}
     peerDependencies:
       effect: ^3.11.8
 
@@ -1842,17 +1842,17 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.21.4(@effect/platform@0.71.4(effect@3.11.8))(effect@3.11.8)':
+  '@effect/platform-node-shared@0.21.4(@effect/platform@0.71.5(effect@3.11.8))(effect@3.11.8)':
     dependencies:
-      '@effect/platform': 0.71.4(effect@3.11.8)
+      '@effect/platform': 0.71.5(effect@3.11.8)
       '@parcel/watcher': 2.5.0
       effect: 3.11.8
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.67.0(@effect/platform@0.71.4(effect@3.11.8))(effect@3.11.8)':
+  '@effect/platform-node@0.67.0(@effect/platform@0.71.5(effect@3.11.8))(effect@3.11.8)':
     dependencies:
-      '@effect/platform': 0.71.4(effect@3.11.8)
-      '@effect/platform-node-shared': 0.21.4(@effect/platform@0.71.4(effect@3.11.8))(effect@3.11.8)
+      '@effect/platform': 0.71.5(effect@3.11.8)
+      '@effect/platform-node-shared': 0.21.4(@effect/platform@0.71.5(effect@3.11.8))(effect@3.11.8)
       effect: 3.11.8
       mime: 3.0.0
       undici: 7.1.1
@@ -1861,7 +1861,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform@0.71.4(effect@3.11.8)':
+  '@effect/platform@0.71.5(effect@3.11.8)':
     dependencies:
       effect: 3.11.8
       find-my-way-ts: 0.1.5
