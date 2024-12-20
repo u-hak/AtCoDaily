@@ -13,7 +13,7 @@ importers:
         version: 0.71.6(effect@3.11.8)
       '@effect/platform-node':
         specifier: ^0.67.0
-        version: 0.67.1(@effect/platform@0.71.6(effect@3.11.8))(effect@3.11.8)
+        version: 0.67.2(@effect/platform@0.71.6(effect@3.11.8))(effect@3.11.8)
       '@prisma/client':
         specifier: 6.1.0
         version: 6.1.0(prisma@6.1.0)
@@ -227,17 +227,17 @@ packages:
     resolution: {integrity: sha512-PZ+vLpxGCRtmr2RMkqh8Zp+BenUaJqlS6xhgWKEZcgC/vfHLEzpHtKkB0sl3nZWpwtcKk6YWy+pU3okL2I97FA==}
     engines: {node: '>=16.11.0'}
 
-  '@effect/platform-node-shared@0.21.5':
-    resolution: {integrity: sha512-Tr580z32+rfMo55dR3wLznN6RwuENVGGz0yh0g8italqKy59ozLg4iJBLiRk+qlqflQmoSY5T9XvSus9pj0reQ==}
+  '@effect/platform-node-shared@0.21.6':
+    resolution: {integrity: sha512-Aj/MRbFV45gQMmAJJXu9OXshNQjMutsoE/um3NGingiVDl1ecamsemQEjG3JWE/08Fia3+aaTxHhSK8zop+arA==}
     peerDependencies:
-      '@effect/platform': ^0.71.5
-      effect: ^3.11.8
+      '@effect/platform': ^0.71.6
+      effect: ^3.11.9
 
-  '@effect/platform-node@0.67.1':
-    resolution: {integrity: sha512-kXBtD4YacKRC1jWWJCRU1boYU3KRcLgCcNlZi/0cBHCDOLVOIRIgRp5jQ4kFq6Dgm96s1/+HZyCxUUwEJYf97A==}
+  '@effect/platform-node@0.67.2':
+    resolution: {integrity: sha512-BY5OGRl/leNvoHPWCI6EBptvrrjipbDjK0sPuAdBNbCWX+p+RpveA34vsSrQAXxGrxzWZOQ1ZrTIC4843EKPBQ==}
     peerDependencies:
-      '@effect/platform': ^0.71.5
-      effect: ^3.11.8
+      '@effect/platform': ^0.71.6
+      effect: ^3.11.9
 
   '@effect/platform@0.71.6':
     resolution: {integrity: sha512-Jnsb17OkMLPsC0RogEzuCLvvE9LaRr+Po+bP4MsXUsR0Ugr0BFpeeATrLxJPc6Fj6WZzSPbhzWROZpn68k78JQ==}
@@ -1534,8 +1534,8 @@ packages:
     resolution: {integrity: sha512-U8uCCl2x9TK3WANvmBavymRzxbfFYG+tAu+fgx3zxQy3qdagQqBLwJVrdyO1TBfUXvfKveMKJZhpvUYoOjM+4g==}
     engines: {node: '>=18.17'}
 
-  undici@7.1.1:
-    resolution: {integrity: sha512-WZkQ6eH9f5ZT93gaIffsbUaDpBwjbpvmMbfaEhOnbdUneurTESeRxwPGwjI28mRFESH3W3e8Togijh37ptOQqA==}
+  undici@7.2.0:
+    resolution: {integrity: sha512-klt+0S55GBViA9nsq48/NSCo4YX5mjydjypxD7UmHh/brMu8h/Mhd/F7qAeoH2NOO8SDTk6kjnTFc4WpzmfYpQ==}
     engines: {node: '>=20.18.1'}
 
   unicorn-magic@0.1.0:
@@ -1842,20 +1842,20 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.21.5(@effect/platform@0.71.6(effect@3.11.8))(effect@3.11.8)':
+  '@effect/platform-node-shared@0.21.6(@effect/platform@0.71.6(effect@3.11.8))(effect@3.11.8)':
     dependencies:
       '@effect/platform': 0.71.6(effect@3.11.8)
       '@parcel/watcher': 2.5.0
       effect: 3.11.8
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.67.1(@effect/platform@0.71.6(effect@3.11.8))(effect@3.11.8)':
+  '@effect/platform-node@0.67.2(@effect/platform@0.71.6(effect@3.11.8))(effect@3.11.8)':
     dependencies:
       '@effect/platform': 0.71.6(effect@3.11.8)
-      '@effect/platform-node-shared': 0.21.5(@effect/platform@0.71.6(effect@3.11.8))(effect@3.11.8)
+      '@effect/platform-node-shared': 0.21.6(@effect/platform@0.71.6(effect@3.11.8))(effect@3.11.8)
       effect: 3.11.8
       mime: 3.0.0
-      undici: 7.1.1
+      undici: 7.2.0
       ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
@@ -2886,7 +2886,7 @@ snapshots:
 
   undici@6.19.8: {}
 
-  undici@7.1.1: {}
+  undici@7.2.0: {}
 
   unicorn-magic@0.1.0: {}
 
