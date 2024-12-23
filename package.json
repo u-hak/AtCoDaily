@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@effect/platform": "^0.72.0",
-    "@effect/platform-node": "^0.67.0",
+    "@effect/platform-node": "^0.68.0",
     "@prisma/client": "6.1.0",
     "discord.js": "^14.16.3",
     "effect": "^3.10.15"
