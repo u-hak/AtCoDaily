@@ -34,8 +34,8 @@ importers:
         specifier: ^19.5.0
         version: 19.6.0
       '@effect/vitest':
-        specifier: ^0.16.0
-        version: 0.16.2(effect@3.12.4)(vitest@2.1.8(@types/node@22.10.6))
+        specifier: ^0.17.0
+        version: 0.17.0(effect@3.12.4)(vitest@2.1.8(@types/node@22.10.6))
       '@types/node':
         specifier: ^22.9.0
         version: 22.10.6
@@ -244,10 +244,10 @@ packages:
     peerDependencies:
       effect: ^3.12.2
 
-  '@effect/vitest@0.16.2':
-    resolution: {integrity: sha512-+i0U5uxucgzFZPjMRGM92u+bRXL9aEzvGqtQl8n0Uwdnlzq2kM9PwnucaU9oxjijcY+qqovHjZRbkg0Svr+MYw==}
+  '@effect/vitest@0.17.0':
+    resolution: {integrity: sha512-kL5fEC1IoICSD/fdflxG/n8WT6+EcAplrA7DwC80aqaMwIxB0X7GRMVz7k392guv5slRTDNGW6oc5tGYhToQDA==}
     peerDependencies:
-      effect: ^3.12.2
+      effect: ^3.12.4
       vitest: ^2.0.5
 
   '@esbuild/aix-ppc64@0.21.5':
@@ -1867,7 +1867,7 @@ snapshots:
       find-my-way-ts: 0.1.5
       multipasta: 0.2.5
 
-  '@effect/vitest@0.16.2(effect@3.12.4)(vitest@2.1.8(@types/node@22.10.6))':
+  '@effect/vitest@0.17.0(effect@3.12.4)(vitest@2.1.8(@types/node@22.10.6))':
     dependencies:
       effect: 3.12.4
       vitest: 2.1.8(@types/node@22.10.6)
