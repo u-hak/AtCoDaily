@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@effect/platform':
-        specifier: ^0.73.0
-        version: 0.73.1(effect@3.12.5)
+        specifier: ^0.74.0
+        version: 0.74.0(effect@3.12.5)
       '@effect/platform-node':
         specifier: ^0.69.0
-        version: 0.69.1(@effect/platform@0.73.1(effect@3.12.5))(effect@3.12.5)
+        version: 0.69.1(@effect/platform@0.74.0(effect@3.12.5))(effect@3.12.5)
       '@prisma/client':
         specifier: 6.2.1
         version: 6.2.1(prisma@6.2.1)
@@ -239,10 +239,10 @@ packages:
       '@effect/platform': ^0.73.1
       effect: ^3.12.4
 
-  '@effect/platform@0.73.1':
-    resolution: {integrity: sha512-aFwHLtTDdWnK0UUGs6Z8QbjVA6XBKp8xzEt4G9lm5c0JALiUrhoWe8e9fpkUMuejF3W0+VeDM3AC+1eglnGQww==}
+  '@effect/platform@0.74.0':
+    resolution: {integrity: sha512-WTniLZ9j5+sLZWKIEwJIUBvA5xKKG/xiLbgApTotc24ohjBZTldcMRNG/a+nAtKuFUSFn88DYY3iReW790xPFw==}
     peerDependencies:
-      effect: ^3.12.4
+      effect: ^3.12.5
 
   '@effect/vitest@0.17.1':
     resolution: {integrity: sha512-ZSb4O9Fm3UzsPzemMSmvyYjlNYXfwMSQkjuoJdzVe+Ka3FrcPaftb1qK2bj3W+hidDCJUjvGCt1PIrK8fDRHyw==}
@@ -1716,17 +1716,17 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.23.1(@effect/platform@0.73.1(effect@3.12.5))(effect@3.12.5)':
+  '@effect/platform-node-shared@0.23.1(@effect/platform@0.74.0(effect@3.12.5))(effect@3.12.5)':
     dependencies:
-      '@effect/platform': 0.73.1(effect@3.12.5)
+      '@effect/platform': 0.74.0(effect@3.12.5)
       '@parcel/watcher': 2.5.0
       effect: 3.12.5
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.69.1(@effect/platform@0.73.1(effect@3.12.5))(effect@3.12.5)':
+  '@effect/platform-node@0.69.1(@effect/platform@0.74.0(effect@3.12.5))(effect@3.12.5)':
     dependencies:
-      '@effect/platform': 0.73.1(effect@3.12.5)
-      '@effect/platform-node-shared': 0.23.1(@effect/platform@0.73.1(effect@3.12.5))(effect@3.12.5)
+      '@effect/platform': 0.74.0(effect@3.12.5)
+      '@effect/platform-node-shared': 0.23.1(@effect/platform@0.74.0(effect@3.12.5))(effect@3.12.5)
       effect: 3.12.5
       mime: 3.0.0
       undici: 7.2.1
@@ -1735,7 +1735,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform@0.73.1(effect@3.12.5)':
+  '@effect/platform@0.74.0(effect@3.12.5)':
     dependencies:
       effect: 3.12.5
       find-my-way-ts: 0.1.5
