@@ -12,8 +12,8 @@ importers:
         specifier: ^0.75.0
         version: 0.75.1(effect@3.12.7)
       '@effect/platform-node':
-        specifier: ^0.70.0
-        version: 0.70.0(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)
+        specifier: ^0.71.0
+        version: 0.71.1(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)
       '@prisma/client':
         specifier: 6.2.1
         version: 6.2.1(prisma@6.2.1)
@@ -227,17 +227,17 @@ packages:
     resolution: {integrity: sha512-QH5CAFe3wHDiedbO+EI3OOiyipwWd+Q6BdoFZUw/Wf2fw5Cv2fgU/9UEtJRmJa9RecI+TAhdGPadMaEIur5yJg==}
     engines: {node: '>=16.11.0'}
 
-  '@effect/platform-node-shared@0.24.0':
-    resolution: {integrity: sha512-kgvA2MhpGX2ubwzr5JexoyucKPvy6arCqJjpENX8SWz5eJ8UqtH2LUX3hDwjDQOkOTu37i0zLUi5FeogtXj85A==}
+  '@effect/platform-node-shared@0.25.1':
+    resolution: {integrity: sha512-GK52lS+PR1gewDtj1uqiSpzd358WHk9oBfjq+1YxWtcLbz6PLkEo05JfRipAejiQec8c61/jwSAG3eP81AtIDA==}
     peerDependencies:
-      '@effect/platform': ^0.74.0
-      effect: ^3.12.5
+      '@effect/platform': ^0.75.1
+      effect: ^3.12.7
 
-  '@effect/platform-node@0.70.0':
-    resolution: {integrity: sha512-ID8TAU3Eqign7cByYu9dau5Q+10fN5C/9AJ+MxzxUaGb2s0hddTO4lpyCSzyHnk3m8uAVsDyAJG555NfRtHrug==}
+  '@effect/platform-node@0.71.1':
+    resolution: {integrity: sha512-O2HFAuU31lzKfWllIfCH7Kb+vbJjtQYskzHVUA8K2BovAAN/L1WwGVRCQQS0Ys+nqTk2BD9x6w7xrtxg9+PEhA==}
     peerDependencies:
-      '@effect/platform': ^0.74.0
-      effect: ^3.12.5
+      '@effect/platform': ^0.75.1
+      effect: ^3.12.7
 
   '@effect/platform@0.75.1':
     resolution: {integrity: sha512-YIrlMiRm4dGDaMtCwiLOwDK5AqtVIWGx4MkqBmYhQTqnthDdyg4j7rxbPvzaedsnn6EEaE7kIIKJVolBQsf3qw==}
@@ -1716,17 +1716,17 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.24.0(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)':
+  '@effect/platform-node-shared@0.25.1(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)':
     dependencies:
       '@effect/platform': 0.75.1(effect@3.12.7)
       '@parcel/watcher': 2.5.0
       effect: 3.12.7
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.70.0(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)':
+  '@effect/platform-node@0.71.1(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)':
     dependencies:
       '@effect/platform': 0.75.1(effect@3.12.7)
-      '@effect/platform-node-shared': 0.24.0(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)
+      '@effect/platform-node-shared': 0.25.1(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)
       effect: 3.12.7
       mime: 3.0.0
       undici: 7.2.1
