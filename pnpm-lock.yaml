@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@effect/platform':
         specifier: ^0.75.0
-        version: 0.75.1(effect@3.12.7)
+        version: 0.75.4(effect@3.12.7)
       '@effect/platform-node':
         specifier: ^0.71.0
-        version: 0.71.1(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)
+        version: 0.71.1(@effect/platform@0.75.4(effect@3.12.7))(effect@3.12.7)
       '@prisma/client':
         specifier: 6.3.0
         version: 6.3.0(prisma@6.3.0(typescript@5.7.3))(typescript@5.7.3)
@@ -239,10 +239,10 @@ packages:
       '@effect/platform': ^0.75.1
       effect: ^3.12.7
 
-  '@effect/platform@0.75.1':
-    resolution: {integrity: sha512-YIrlMiRm4dGDaMtCwiLOwDK5AqtVIWGx4MkqBmYhQTqnthDdyg4j7rxbPvzaedsnn6EEaE7kIIKJVolBQsf3qw==}
+  '@effect/platform@0.75.4':
+    resolution: {integrity: sha512-G+kUKGI9zR8vsMu05lR4KWURm0x4Z6wG24uVnj0O0j/stAh8gabVy+xpg2g0T3BNyam0uzfXCJJ+ZJJNbkTYcA==}
     peerDependencies:
-      effect: ^3.12.7
+      effect: ^3.12.10
 
   '@effect/vitest@0.17.3':
     resolution: {integrity: sha512-sRLJ5tl/i2hnNr9NOr1Xu+uOmOraRmUZyt8pOB/83NevcKk9dKeWcxVitg4sVgpcWWfC3vzIIaM6J9DMqaCYuw==}
@@ -1724,17 +1724,17 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node-shared@0.25.1(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)':
+  '@effect/platform-node-shared@0.25.1(@effect/platform@0.75.4(effect@3.12.7))(effect@3.12.7)':
     dependencies:
-      '@effect/platform': 0.75.1(effect@3.12.7)
+      '@effect/platform': 0.75.4(effect@3.12.7)
       '@parcel/watcher': 2.5.0
       effect: 3.12.7
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.71.1(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)':
+  '@effect/platform-node@0.71.1(@effect/platform@0.75.4(effect@3.12.7))(effect@3.12.7)':
     dependencies:
-      '@effect/platform': 0.75.1(effect@3.12.7)
-      '@effect/platform-node-shared': 0.25.1(@effect/platform@0.75.1(effect@3.12.7))(effect@3.12.7)
+      '@effect/platform': 0.75.4(effect@3.12.7)
+      '@effect/platform-node-shared': 0.25.1(@effect/platform@0.75.4(effect@3.12.7))(effect@3.12.7)
       effect: 3.12.7
       mime: 3.0.0
       undici: 7.2.1
@@ -1743,7 +1743,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform@0.75.1(effect@3.12.7)':
+  '@effect/platform@0.75.4(effect@3.12.7)':
     dependencies:
       effect: 3.12.7
       find-my-way-ts: 0.1.5
