@@ -35,7 +35,7 @@ importers:
         version: 19.8.0
       '@effect/vitest':
         specifier: ^0.20.0
-        version: 0.20.3(effect@3.14.2)(vitest@3.1.1(@types/node@22.13.14)(jiti@2.4.2)(tsx@4.19.3))
+        version: 0.20.4(effect@3.14.2)(vitest@3.1.1(@types/node@22.13.14)(jiti@2.4.2)(tsx@4.19.3))
       '@types/node':
         specifier: ^22.9.0
         version: 22.13.14
@@ -284,10 +284,10 @@ packages:
       '@effect/platform': ^0.80.1
       effect: ^3.14.1
 
-  '@effect/vitest@0.20.3':
-    resolution: {integrity: sha512-cYeJUlfM4XqDWE1kLGUdIuW3vyJLVKlDXegyESXdmPijKIJhL/IOucHnGB19vA92jW7dkw9Vcp6jxxtGjU8WeQ==}
+  '@effect/vitest@0.20.4':
+    resolution: {integrity: sha512-N8hY0XMY7Hddr2YcRDuu/ZC1D33klhdFrMv7yJa2eJ/1rIkAq4RimTRQoJIde2TIkcCn41xrkYzudgzfYmjdZw==}
     peerDependencies:
-      effect: ^3.14.3
+      effect: ^3.14.4
       vitest: ^3.0.0
 
   '@esbuild/aix-ppc64@0.25.2':
@@ -1746,7 +1746,7 @@ snapshots:
       effect: 3.14.2
       uuid: 11.1.0
 
-  '@effect/vitest@0.20.3(effect@3.14.2)(vitest@3.1.1(@types/node@22.13.14)(jiti@2.4.2)(tsx@4.19.3))':
+  '@effect/vitest@0.20.4(effect@3.14.2)(vitest@3.1.1(@types/node@22.13.14)(jiti@2.4.2)(tsx@4.19.3))':
     dependencies:
       effect: 3.14.2
       vitest: 3.1.1(@types/node@22.13.14)(jiti@2.4.2)(tsx@4.19.3)
