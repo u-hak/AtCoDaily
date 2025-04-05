@@ -16,7 +16,7 @@ importers:
         version: 0.76.9(@effect/cluster@0.29.2(@effect/platform@0.80.6(effect@3.14.5))(@effect/rpc@0.55.1(@effect/platform@0.80.6(effect@3.14.5))(effect@3.14.5))(@effect/sql@0.33.1(@effect/experimental@0.44.1(@effect/platform@0.80.6(effect@3.14.5))(effect@3.14.5))(@effect/platform@0.80.6(effect@3.14.5))(effect@3.14.5))(effect@3.14.5))(@effect/platform@0.80.6(effect@3.14.5))(@effect/rpc@0.55.1(@effect/platform@0.80.6(effect@3.14.5))(effect@3.14.5))(@effect/sql@0.33.1(@effect/experimental@0.44.1(@effect/platform@0.80.6(effect@3.14.5))(effect@3.14.5))(@effect/platform@0.80.6(effect@3.14.5))(effect@3.14.5))(effect@3.14.5)
       '@prisma/client':
         specifier: 6.5.0
-        version: 6.5.0(prisma@6.5.0(typescript@5.8.2))(typescript@5.8.2)
+        version: 6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3)
       discord.js:
         specifier: ^14.16.3
         version: 14.18.0
@@ -29,7 +29,7 @@ importers:
         version: 1.9.4
       '@commitlint/cli':
         specifier: ^19.5.0
-        version: 19.8.0(@types/node@22.14.0)(typescript@5.8.2)
+        version: 19.8.0(@types/node@22.14.0)(typescript@5.8.3)
       '@commitlint/config-conventional':
         specifier: ^19.5.0
         version: 19.8.0
@@ -41,7 +41,7 @@ importers:
         version: 22.14.0
       commitlint:
         specifier: ^19.5.0
-        version: 19.8.0(@types/node@22.14.0)(typescript@5.8.2)
+        version: 19.8.0(@types/node@22.14.0)(typescript@5.8.3)
       esbuild:
         specifier: ^0.25.0
         version: 0.25.2
@@ -53,7 +53,7 @@ importers:
         version: 7.0.1
       prisma:
         specifier: ^6.0.0
-        version: 6.5.0(typescript@5.8.2)
+        version: 6.5.0(typescript@5.8.3)
       ts-pattern:
         specifier: ^5.5.0
         version: 5.7.0
@@ -62,7 +62,7 @@ importers:
         version: 4.19.3
       typescript:
         specifier: ^5.6.3
-        version: 5.8.2
+        version: 5.8.3
       vitest:
         specifier: ^3.0.0
         version: 3.1.1(@types/node@22.14.0)(jiti@2.4.2)(tsx@4.19.3)
@@ -1348,8 +1348,8 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  typescript@5.8.2:
-    resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1527,11 +1527,11 @@ snapshots:
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
 
-  '@commitlint/cli@19.8.0(@types/node@22.14.0)(typescript@5.8.2)':
+  '@commitlint/cli@19.8.0(@types/node@22.14.0)(typescript@5.8.3)':
     dependencies:
       '@commitlint/format': 19.8.0
       '@commitlint/lint': 19.8.0
-      '@commitlint/load': 19.8.0(@types/node@22.14.0)(typescript@5.8.2)
+      '@commitlint/load': 19.8.0(@types/node@22.14.0)(typescript@5.8.3)
       '@commitlint/read': 19.8.0
       '@commitlint/types': 19.8.0
       tinyexec: 0.3.2
@@ -1578,15 +1578,15 @@ snapshots:
       '@commitlint/rules': 19.8.0
       '@commitlint/types': 19.8.0
 
-  '@commitlint/load@19.8.0(@types/node@22.14.0)(typescript@5.8.2)':
+  '@commitlint/load@19.8.0(@types/node@22.14.0)(typescript@5.8.3)':
     dependencies:
       '@commitlint/config-validator': 19.8.0
       '@commitlint/execute-rule': 19.8.0
       '@commitlint/resolve-extends': 19.8.0
       '@commitlint/types': 19.8.0
       chalk: 5.4.1
-      cosmiconfig: 9.0.0(typescript@5.8.2)
-      cosmiconfig-typescript-loader: 6.1.0(@types/node@22.14.0)(cosmiconfig@9.0.0(typescript@5.8.2))(typescript@5.8.2)
+      cosmiconfig: 9.0.0(typescript@5.8.3)
+      cosmiconfig-typescript-loader: 6.1.0(@types/node@22.14.0)(cosmiconfig@9.0.0(typescript@5.8.3))(typescript@5.8.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -1908,10 +1908,10 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.5.1
       '@parcel/watcher-win32-x64': 2.5.1
 
-  '@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.2))(typescript@5.8.2)':
+  '@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3)':
     optionalDependencies:
-      prisma: 6.5.0(typescript@5.8.2)
-      typescript: 5.8.2
+      prisma: 6.5.0(typescript@5.8.3)
+      typescript: 5.8.3
 
   '@prisma/config@6.5.0':
     dependencies:
@@ -2126,9 +2126,9 @@ snapshots:
 
   color-name@1.1.4: {}
 
-  commitlint@19.8.0(@types/node@22.14.0)(typescript@5.8.2):
+  commitlint@19.8.0(@types/node@22.14.0)(typescript@5.8.3):
     dependencies:
-      '@commitlint/cli': 19.8.0(@types/node@22.14.0)(typescript@5.8.2)
+      '@commitlint/cli': 19.8.0(@types/node@22.14.0)(typescript@5.8.3)
       '@commitlint/types': 19.8.0
     transitivePeerDependencies:
       - '@types/node'
@@ -2154,21 +2154,21 @@ snapshots:
       meow: 12.1.1
       split2: 4.2.0
 
-  cosmiconfig-typescript-loader@6.1.0(@types/node@22.14.0)(cosmiconfig@9.0.0(typescript@5.8.2))(typescript@5.8.2):
+  cosmiconfig-typescript-loader@6.1.0(@types/node@22.14.0)(cosmiconfig@9.0.0(typescript@5.8.3))(typescript@5.8.3):
     dependencies:
       '@types/node': 22.14.0
-      cosmiconfig: 9.0.0(typescript@5.8.2)
+      cosmiconfig: 9.0.0(typescript@5.8.3)
       jiti: 2.4.2
-      typescript: 5.8.2
+      typescript: 5.8.3
 
-  cosmiconfig@9.0.0(typescript@5.8.2):
+  cosmiconfig@9.0.0(typescript@5.8.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.0
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.8.2
+      typescript: 5.8.3
 
   css-select@5.1.0:
     dependencies:
@@ -2538,13 +2538,13 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  prisma@6.5.0(typescript@5.8.2):
+  prisma@6.5.0(typescript@5.8.3):
     dependencies:
       '@prisma/config': 6.5.0
       '@prisma/engines': 6.5.0
     optionalDependencies:
       fsevents: 2.3.3
-      typescript: 5.8.2
+      typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
 
@@ -2639,7 +2639,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  typescript@5.8.2: {}
+  typescript@5.8.3: {}
 
   undici-types@6.21.0: {}
 
