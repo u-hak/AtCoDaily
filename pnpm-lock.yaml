@@ -35,7 +35,7 @@ importers:
         version: 19.8.1
       '@effect/vitest':
         specifier: ^0.22.0
-        version: 0.22.2(effect@3.15.0)(vitest@3.1.3(@types/node@22.15.17)(jiti@2.4.2)(tsx@4.19.4))
+        version: 0.22.3(effect@3.15.0)(vitest@3.1.3(@types/node@22.15.17)(jiti@2.4.2)(tsx@4.19.4))
       '@types/node':
         specifier: ^22.9.0
         version: 22.15.17
@@ -284,10 +284,10 @@ packages:
       '@effect/platform': ^0.80.1
       effect: ^3.14.1
 
-  '@effect/vitest@0.22.2':
-    resolution: {integrity: sha512-EZudN92GRXqD1FLk7wW5yjW3HN5BEWnDoBoi01Pn5os+8+RxLU8Bk4cXcjhgWUDsHjoPzGRJTn42x6GvR7lTkA==}
+  '@effect/vitest@0.22.3':
+    resolution: {integrity: sha512-sjJCexqniVxarqib2ae639mgo+ZaFFIz55FekSVz5hgktByAeHGKW7c4+EPjaqYpacI13yV/FS8v9bdltCm2tA==}
     peerDependencies:
-      effect: ^3.15.2
+      effect: ^3.15.3
       vitest: ^3.0.0
 
   '@esbuild/aix-ppc64@0.25.4':
@@ -473,8 +473,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@opentelemetry/semantic-conventions@1.33.0':
-    resolution: {integrity: sha512-TIpZvE8fiEILFfTlfPnltpBaD3d9/+uQHVCyC3vfdh6WfCXKhNFzoP5RyDDIndfvZC5GrA4pyEDNyjPloJud+w==}
+  '@opentelemetry/semantic-conventions@1.34.0':
+    resolution: {integrity: sha512-aKcOkyrorBGlajjRdVoJWHTxfxO1vCNHLJVlSDaRHDIdjU+pX8IYQPvPDkYiujKLbRnWU+1TBwEt0QRgSm4SGA==}
     engines: {node: '>=14'}
 
   '@parcel/watcher-android-arm64@2.5.1':
@@ -1761,11 +1761,11 @@ snapshots:
     dependencies:
       '@effect/experimental': 0.44.1(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0)
       '@effect/platform': 0.82.0(effect@3.15.0)
-      '@opentelemetry/semantic-conventions': 1.33.0
+      '@opentelemetry/semantic-conventions': 1.34.0
       effect: 3.15.0
       uuid: 11.1.0
 
-  '@effect/vitest@0.22.2(effect@3.15.0)(vitest@3.1.3(@types/node@22.15.17)(jiti@2.4.2)(tsx@4.19.4))':
+  '@effect/vitest@0.22.3(effect@3.15.0)(vitest@3.1.3(@types/node@22.15.17)(jiti@2.4.2)(tsx@4.19.4))':
     dependencies:
       effect: 3.15.0
       vitest: 3.1.3(@types/node@22.15.17)(jiti@2.4.2)(tsx@4.19.4)
@@ -1865,7 +1865,7 @@ snapshots:
   '@msgpackr-extract/msgpackr-extract-win32-x64@3.0.3':
     optional: true
 
-  '@opentelemetry/semantic-conventions@1.33.0': {}
+  '@opentelemetry/semantic-conventions@1.34.0': {}
 
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true
