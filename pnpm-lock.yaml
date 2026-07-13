@@ -34,8 +34,8 @@ importers:
         specifier: ^19.5.0
         version: 19.8.1
       '@effect/vitest':
-        specifier: ^0.23.0
-        version: 0.23.7(effect@3.15.0)(vitest@3.1.3(@types/node@22.15.29)(jiti@2.4.2)(tsx@4.20.3))
+        specifier: ^0.30.0
+        version: 0.30.0(effect@3.15.0)(vitest@3.1.3(@types/node@22.15.29)(jiti@2.4.2)(tsx@4.20.3))
       '@types/node':
         specifier: ^22.9.0
         version: 22.15.29
@@ -284,11 +284,11 @@ packages:
       '@effect/platform': ^0.80.1
       effect: ^3.14.1
 
-  '@effect/vitest@0.23.7':
-    resolution: {integrity: sha512-WUe8mW4C+7oUjpPoUSsOsFOY5eC7tzPaZPygZ6F9W0LXuYhZksE19fc3jJYiHPbR+lHT/48ypBsS/BiQEJet+w==}
+  '@effect/vitest@0.30.0':
+    resolution: {integrity: sha512-2qcK7F4XSwOn7Ye9vgEkrndHiiHVf9Nl+U5jvvLBKeYx4+8++O5Y8RFezaQzs/rWx8GkdlStv/s+HYMHZ/2/AQ==}
     peerDependencies:
-      effect: ^3.16.7
-      vitest: ^3.0.0
+      effect: ^3.22.0
+      vitest: ^3.2.0
 
   '@esbuild/aix-ppc64@0.25.5':
     resolution: {integrity: sha512-9o3TMmpmftaCMepOdA5k/yDw8SfInyzWWTjYTFCX3kPSDJMROQTb8jg+h9Cnwnmm1vOzvxN7gIfB5V2ewpjtGA==}
@@ -992,6 +992,7 @@ packages:
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   global-directory@4.0.1:
@@ -1765,7 +1766,7 @@ snapshots:
       effect: 3.15.0
       uuid: 11.1.0
 
-  '@effect/vitest@0.23.7(effect@3.15.0)(vitest@3.1.3(@types/node@22.15.29)(jiti@2.4.2)(tsx@4.20.3))':
+  '@effect/vitest@0.30.0(effect@3.15.0)(vitest@3.1.3(@types/node@22.15.29)(jiti@2.4.2)(tsx@4.20.3))':
     dependencies:
       effect: 3.15.0
       vitest: 3.1.3(@types/node@22.15.29)(jiti@2.4.2)(tsx@4.20.3)
